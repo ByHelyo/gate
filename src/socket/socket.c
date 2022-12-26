@@ -1,22 +1,18 @@
 #include <socket/socket.h>
 
+#include <errno.h>
 #include <netdb.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
-#include <errno.h>
 
-static void populate_hints_addrinfo(struct addrinfo **hints);
+static struct addrinfo build_hints_addrinfo(void);
 
 int build_listener_socket(const char *port, int listen_queue_backlog) {
   int listener = -1; /* listener scoket */
   int rv;            /* return value */
-
-  struct addrinfo hints, *p, *result;
-
-  struct addrinfo *phints = &hints;
-
-  populate_hints_addrinfo(&phints);
+  struct addrinfo *p, *result;
+  struct addrinfo hints = build_hints_addrinfo();
 
   if ((rv = getaddrinfo(NULL, port, &hints, &result)) != 0) {
     fprintf(stderr, "[build_listener_socket] getaddrinfo failed: %s\n",
@@ -28,7 +24,8 @@ int build_listener_socket(const char *port, int listen_queue_backlog) {
     listener = socket(p->ai_family, p->ai_socktype, p->ai_protocol);
 
     if (listener == -1) {
-      fprintf(stderr, "[build_listener_socket] socket() failed: %s\n", strerror(errno));
+      fprintf(stderr, "[build_listener_socket] socket() failed: %s\n",
+              strerror(errno));
       continue;
     }
 
@@ -36,7 +33,8 @@ int build_listener_socket(const char *port, int listen_queue_backlog) {
       break; /* Success */
     }
 
-    fprintf(stderr, "[build_listener_socket] Failed to bind: %s\n", strerror(errno));
+    fprintf(stderr, "[build_listener_socket] Failed to bind: %s\n",
+            strerror(errno));
     close(listener);
   }
 
@@ -47,16 +45,21 @@ int build_listener_socket(const char *port, int listen_queue_backlog) {
   }
 
   if ((rv = listen(listener, listen_queue_backlog)) == -1) {
-    fprintf(stderr, "[build_listener_socket] Failed to listen: %s\n", strerror(rv));
+    close(listener);
+    fprintf(stderr, "[build_listener_socket] Failed to listen: %s\n",
+            strerror(rv));
   }
 
   return listener;
 }
 
-static void populate_hints_addrinfo(struct addrinfo **hints) {
-  memset(*hints, 0, sizeof(struct addrinfo));
+static struct addrinfo build_hints_addrinfo(void) {
+  struct addrinfo hints;
+  memset(&hints, 0, sizeof(struct addrinfo));
 
-  (*hints)->ai_family = AF_UNSPEC;     /* Allow IPv4 or IPv6 */
-  (*hints)->ai_socktype = SOCK_STREAM; /* Stream socket */
-  (*hints)->ai_flags = AI_PASSIVE;     /* local host address */
+  hints.ai_family = AF_UNSPEC;     /* Allow IPv4 or IPv6 */
+  hints.ai_socktype = SOCK_STREAM; /* Stream socket */
+  hints.ai_flags = AI_PASSIVE;     /* local host address */
+
+  return hints;
 }

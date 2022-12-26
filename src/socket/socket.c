@@ -4,12 +4,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <errno.h>
 
 static void populate_hints_addrinfo(struct addrinfo **hints);
 
 int build_listener_socket(const char *port, int listen_queue_backlog) {
   int listener = -1; /* listener scoket */
-  int rv;            /* return value of getaddrinfo() */
+  int rv;            /* return value */
 
   struct addrinfo hints, *p, *result;
 
@@ -18,7 +19,7 @@ int build_listener_socket(const char *port, int listen_queue_backlog) {
   populate_hints_addrinfo(&phints);
 
   if ((rv = getaddrinfo(NULL, port, &hints, &result)) != 0) {
-    fprintf(stderr, "[build_listener_socket] getaddrinfo: %s\n",
+    fprintf(stderr, "[build_listener_socket] getaddrinfo failed: %s\n",
             gai_strerror(rv));
     return -1;
   }
@@ -27,6 +28,7 @@ int build_listener_socket(const char *port, int listen_queue_backlog) {
     listener = socket(p->ai_family, p->ai_socktype, p->ai_protocol);
 
     if (listener == -1) {
+      fprintf(stderr, "[build_listener_socket] socket() failed: %s\n", strerror(errno));
       continue;
     }
 
@@ -34,6 +36,7 @@ int build_listener_socket(const char *port, int listen_queue_backlog) {
       break; /* Success */
     }
 
+    fprintf(stderr, "[build_listener_socket] Failed to bind: %s\n", strerror(errno));
     close(listener);
   }
 
@@ -43,8 +46,8 @@ int build_listener_socket(const char *port, int listen_queue_backlog) {
     return -1;
   }
 
-  if (listen(listener, listen_queue_backlog) == -1) {
-    fprintf(stderr, "[build_listener_socket] listen:\n");
+  if ((rv = listen(listener, listen_queue_backlog)) == -1) {
+    fprintf(stderr, "[build_listener_socket] Failed to listen: %s\n", strerror(rv));
   }
 
   return listener;

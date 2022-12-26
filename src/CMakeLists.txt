@@ -1,1 +1,1 @@
-add_executable(gate main.c)
+add_subdirectory(socket)

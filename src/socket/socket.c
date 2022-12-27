@@ -1,65 +1,47 @@
 #include <socket/socket.h>
 
 #include <errno.h>
-#include <netdb.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
 
-static struct addrinfo build_hints_addrinfo(void);
-
-int build_listener_socket(const char *port, int listen_queue_backlog) {
-  int listener = -1; /* listener scoket */
-  int rv;            /* return value */
-  struct addrinfo *p, *result;
-  struct addrinfo hints = build_hints_addrinfo();
-
-  if ((rv = getaddrinfo(NULL, port, &hints, &result)) != 0) {
-    fprintf(stderr, "[build_listener_socket] getaddrinfo failed: %s\n",
-            gai_strerror(rv));
-    return -1;
-  }
-
-  for (p = result; p != NULL; p = p->ai_next) {
-    listener = socket(p->ai_family, p->ai_socktype, p->ai_protocol);
-
-    if (listener == -1) {
-      fprintf(stderr, "[build_listener_socket] socket() failed: %s\n",
-              strerror(errno));
-      continue;
-    }
-
-    if (bind(listener, p->ai_addr, p->ai_addrlen) == 0) {
-      break; /* Success */
-    }
-
-    fprintf(stderr, "[build_listener_socket] Failed to bind: %s\n",
+int close_wrap(int fd) {
+  if (close(fd) == -1) {
+    fprintf(stderr, "Failed to close the file descriptor %i: %s\n", fd,
             strerror(errno));
-    close(listener);
-  }
-
-  freeaddrinfo(result);
-
-  if (p == NULL) {
     return -1;
   }
 
-  if ((rv = listen(listener, listen_queue_backlog)) == -1) {
-    close(listener);
-    fprintf(stderr, "[build_listener_socket] Failed to listen: %s\n",
-            strerror(rv));
-  }
-
-  return listener;
+  return 0;
 }
 
-static struct addrinfo build_hints_addrinfo(void) {
-  struct addrinfo hints;
-  memset(&hints, 0, sizeof(struct addrinfo));
+int socket_wrap(int domain, int type, int protocol) {
+  int sockfd = socket(domain, type, protocol);
 
-  hints.ai_family = AF_UNSPEC;     /* Allow IPv4 or IPv6 */
-  hints.ai_socktype = SOCK_STREAM; /* Stream socket */
-  hints.ai_flags = AI_PASSIVE;     /* local host address */
+  if (sockfd == -1) {
+    fprintf(stderr,
+            "Socket failed to create an endpoint for communication: %s\n",
+            strerror(errno));
+    return -1;
+  }
 
-  return hints;
+  return sockfd;
+}
+
+int bind_wrap(int sockfd, const struct sockaddr *addr, socklen_t addrlen) {
+  if (bind(sockfd, addr, addrlen) == -1) {
+    fprintf(stderr, "Bind failed: %s\n", strerror(errno));
+    return -1;
+  }
+
+  return 0;
+}
+
+int listen_wrap(int sockfd, int backlog) {
+  if (listen(sockfd, backlog) == -1) {
+    fprintf(stderr, "Failed to listen: %s\n", strerror(errno));
+    return -1;
+  }
+
+  return 0;
 }

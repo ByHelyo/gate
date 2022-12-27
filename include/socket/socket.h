@@ -1,14 +1,44 @@
 #ifndef GATE_SOCKET_H
 #define GATE_SOCKET_H
 
+#include <sys/socket.h>
+
 /**
- * Build the listener socket
+ * \brief Wrapper of close(2) syscall.
  *
- * @param port Listener socket port.
- * @param listen_queue_backlog Number of connections in the socket's listen
- * queue.
- * @return Return the listener socket. On error, print the error and return -1.
+ * @param fd File descriptor to close.
+ * @return Return 0 on success otherwise return -1.
  */
-int build_listener_socket(const char *port, int listen_queue_backlog);
+int close_wrap(int fd);
+
+/**
+ * \brief Wrapper of socket(2) syscall.
+ *
+ * @param domain Socket domain.
+ * @param type Socket type.
+ * @param protocol Socket protocol.
+ * @return Return a file descriptor for the new socket.
+ */
+int socket_wrap(int domain, int type, int protocol);
+
+/**
+ * \brief Wrapper of bind(2) syscall.
+ *
+ * @param sockfd Socket to bind.
+ * @param addr Address assigned to the socket.
+ * @param addrlen Specifies the size, in bytes, of the address structure pointed
+ * to by addr.
+ * @return Return 0 on sucess otherwise return -1.
+ */
+int bind_wrap(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
+
+/**
+ * \brief Wrapper of listen(2) syscall.
+ *
+ * @param sockfd Socket file descriptor to listen.
+ * @param backlog Maximum length to which the queue of pending connections.
+ * @return Return 0 on sucess otherwise return -1.
+ */
+int listen_wrap(int sockfd, int backlog);
 
 #endif // GATE_SOCKET_H

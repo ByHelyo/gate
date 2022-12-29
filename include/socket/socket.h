@@ -41,4 +41,17 @@ int bind_wrap(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
  */
 int listen_wrap(int sockfd, int backlog);
 
+/**
+ *
+ * \brief Wrapper of accept(2) syscall.
+ *
+ * @param sockfd The listener socket.
+ * @param addr addr is filled with the address of new connection.
+ * @param addrlen Size of addr in bytes.
+ * @return Return a file descriptor for the accepted socket. On error, return
+ * -1.
+ */
+int accept_wrap(int sockfd, struct sockaddr *restrict addr,
+                socklen_t *restrict addrlen);
+
 #endif // GATE_SOCKET_H

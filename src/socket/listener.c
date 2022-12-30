@@ -48,6 +48,9 @@ int build_listener_socket(const char *port, int listen_queue_backlog) {
     return -1;
   }
 
+  printf("Listener socket created sucessfully (file descriptor %i)\n",
+         listener);
+
   return listener;
 }
 

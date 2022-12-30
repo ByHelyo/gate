@@ -27,6 +27,9 @@ int event_build(struct Event *event, const char *port,
     return -1;
   }
 
+  printf("Event created successfully (epoll file descriptor %i)\n",
+         event->epfd);
+
   return 0;
 }
 
@@ -38,6 +41,8 @@ int event_wait(struct Event *event) {
 
     return -1;
   }
+
+  printf("%i events ready\n", nfds);
 
   event->event_ready.size = (unsigned int)nfds;
 

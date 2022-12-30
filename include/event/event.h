@@ -33,6 +33,8 @@ struct Event {
  * Create a new epoll instance and a listener socket.
  * Add the listener socket in the epoll instance as EPOLLIN.
  *
+ * If an error occurred. Return -1 and everything is freed properly.
+ *
  * EPOLLIN The associated file is available for read(2) operations.
  *
  * @param event The event instance to build. Careful every fields will be

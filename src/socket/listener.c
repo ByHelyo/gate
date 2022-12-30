@@ -44,7 +44,8 @@ int build_listener_socket(const char *port, int listen_queue_backlog) {
   rv = listen_wrap(listener, listen_queue_backlog);
 
   if (rv == -1) {
-    close_wrap(listener);
+    close_wrap(
+        listener); /* Listen socket failed. Close listener file descriptor */
     return -1;
   }
 

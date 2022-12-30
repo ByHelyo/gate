@@ -2,6 +2,7 @@
 
 #include <errno.h>
 #include <socket/listener.h>
+#include <socket/socket.h>
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
@@ -20,6 +21,12 @@ int event_build(struct Event *event, const char *port,
 
   event->listener = build_listener_socket(port, listen_queue_backlog);
 
+  if (event->listener == -1) {
+    close_wrap(
+        event->epfd); /* Listener socket failed. Free epoll file descriptor */
+    return -1;
+  }
+
   listener_ev.data.fd = event->listener;
   listener_ev.events = EPOLLIN;
 
@@ -27,6 +34,12 @@ int event_build(struct Event *event, const char *port,
       -1) {
     fprintf(stderr, "Failed to add listener socket in epoll: %s\n",
             strerror(errno));
+
+    // Failed to add listener in epoll. Free listener and epoll file
+    // descriptors.
+    close_wrap(event->listener);
+    close_wrap(event->epfd);
+
     return -1;
   }
 

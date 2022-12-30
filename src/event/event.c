@@ -4,7 +4,6 @@
 #include <socket/listener.h>
 #include <stdio.h>
 #include <string.h>
-#include <sys/epoll.h>
 #include <unistd.h>
 
 int event_build(struct Event *event, const char *port,
@@ -31,18 +30,37 @@ int event_build(struct Event *event, const char *port,
   return 0;
 }
 
+int event_wait(struct Event *event) {
+  int nfds = epoll_wait(event->epfd, event->event_ready.events, MAX_EVENTS, -1);
+
+  if (nfds == -1) {
+    fprintf(stderr, "Waiting for events failed: %s\n", strerror(errno));
+
+    return -1;
+  }
+
+  event->event_ready.size = (unsigned int)nfds;
+
+  return 0;
+}
+
 int event_close(struct Event *event) {
+
   int ret = 0;
 
   if (close(event->listener) == -1) {
-    fprintf(stderr, "Failed to close listener file descriptor: %s\n", strerror(errno));
+    fprintf(stderr, "Failed to close listener file descriptor: %s\n",
+            strerror(errno));
     ret = -1;
   }
 
   if (close(event->epfd) == -1) {
-    fprintf(stderr, "Failed to close epoll file descriptor: %s\n", strerror(errno));
+    fprintf(stderr, "Failed to close epoll file descriptor: %s\n",
+            strerror(errno));
     ret = -1;
   }
+
+  printf("Event close successfully\n");
 
   return ret;
 }

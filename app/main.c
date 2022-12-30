@@ -1,6 +1,24 @@
+#include <core/core.h>
 #include <stdio.h>
 
 int main(void) {
-  printf("Hello, World!\n");
-  return 0;
+  int rv;
+  struct Event event;
+
+  rv = event_build(&event, "5173", 10);
+
+  if (rv == -1) {
+    goto end; /* Failure, File descriptors are already closed. */
+  }
+
+  rv = core_run(&event);
+
+  event_close(&event);
+
+end:
+  fclose(stdin);
+  fclose(stderr);
+  fclose(stdout);
+
+  return rv;
 }

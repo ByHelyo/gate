@@ -24,4 +24,14 @@ struct Event {
 int event_build(struct Event *event, const char *port,
                 int listen_queue_backlog);
 
+/**
+ * \brief Close the event instance.
+ *
+ * Close the listener file descriptor then the epoll file descriptor.
+ *
+ * @param event The event instance.
+ * @return Return 0 on success, otherwise return -1.
+ */
+int event_close(struct Event *event);
+
 #endif // GATE_EVENT_H

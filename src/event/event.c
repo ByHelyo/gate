@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/epoll.h>
+#include <unistd.h>
 
 int event_build(struct Event *event, const char *port,
                 int listen_queue_backlog) {
@@ -28,4 +29,20 @@ int event_build(struct Event *event, const char *port,
   }
 
   return 0;
+}
+
+int event_close(struct Event *event) {
+  int ret = 0;
+
+  if (close(event->listener) == -1) {
+    fprintf(stderr, "Failed to close listener file descriptor: %s\n", strerror(errno));
+    ret = -1;
+  }
+
+  if (close(event->epfd) == -1) {
+    fprintf(stderr, "Failed to close epoll file descriptor: %s\n", strerror(errno));
+    ret = -1;
+  }
+
+  return ret;
 }

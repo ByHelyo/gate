@@ -6,4 +6,5 @@ doxygen_add_docs(docs
         event/event.h
         socket/listener.h
         socket/socket.h
+        core/core.h
         )

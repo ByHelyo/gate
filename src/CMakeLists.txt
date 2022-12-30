@@ -1,2 +1,3 @@
 add_subdirectory(socket)
 add_subdirectory(event)
+add_subdirectory(core)

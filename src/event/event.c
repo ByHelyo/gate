@@ -64,6 +64,26 @@ int event_wait(struct Event *event) {
   return 0;
 }
 
+int event_accept(struct Event *event) {
+  struct epoll_event ev;
+  int conn_sock = accept_wrap(event->listener, NULL, NULL);
+
+  if (conn_sock == -1) {
+    return -1; /* Accept failed */
+  }
+
+  ev.events = EPOLLIN | EPOLLOUT;
+  ev.data.fd = conn_sock;
+
+  if (epoll_ctl(event->epfd, EPOLL_CTL_ADD, conn_sock, &ev) == -1) {
+    fprintf(stderr, "Failed to add a new connection in epoll\n");
+    close_wrap(conn_sock); /* Free the connection socket. */
+    return -1;
+  }
+
+  return 0;
+}
+
 int event_close(struct Event *event) {
   int rv;
 

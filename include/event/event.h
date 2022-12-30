@@ -59,6 +59,17 @@ int event_build(struct Event *event, const char *port,
 int event_wait(struct Event *event);
 
 /**
+ * \brief Accept a new connection and add it in epoll.
+ *
+ * Accept the new connection in listener socket.
+ * Add the new connection in epoll.
+ *
+ * @param event The event instance.
+ * @return On success, return 0 otherwise return -1.
+ */
+int event_accept(struct Event *event);
+
+/**
  * \brief Close the event instance.
  *
  * Close the listener file descriptor then the epoll file descriptor.

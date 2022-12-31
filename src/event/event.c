@@ -13,7 +13,7 @@ int event_build(struct Event *event, const char *port,
   struct epoll_event listener_ev;
 
   if ((event->epfd = epoll_create1(0)) == -1) {
-    fprintf(stderr, "Failed to create epoll instance: %s\n", strerror(errno));
+    perror("Failed to create epoll instance");
     return -1;
   }
 
@@ -33,8 +33,7 @@ int event_build(struct Event *event, const char *port,
 
   if (epoll_ctl(event->epfd, EPOLL_CTL_ADD, event->listener, &listener_ev) ==
       -1) {
-    fprintf(stderr, "Failed to add listener socket in epoll: %s\n",
-            strerror(errno));
+    perror("Failed to add listener socket in epoll");
 
     // Failed to add listener in epoll. Free listener and epoll file
     // descriptors.
@@ -53,7 +52,7 @@ int event_wait(struct Event *event) {
   int nfds = epoll_wait(event->epfd, event->event_ready.events, MAX_EVENTS, -1);
 
   if (nfds == -1) {
-    fprintf(stderr, "Waiting for events failed: %s\n", strerror(errno));
+    perror("Waiting for events failed");
 
     return -1;
   }
@@ -77,7 +76,10 @@ int event_accept(struct Event *event) {
   ev.data.ptr = build_event_data(conn_sock);
 
   if (epoll_ctl(event->epfd, EPOLL_CTL_ADD, conn_sock, &ev) == -1) {
-    fprintf(stderr, "Failed to add a new connection in epoll\n");
+    fprintf(
+        stderr,
+        "Failed to add a new connection (file descriptor %i) in epoll: %s\n",
+        conn_sock, strerror(errno));
     close_wrap(conn_sock); /* Free the connection socket. */
     return -1;
   }
@@ -93,8 +95,7 @@ int event_close(struct Event *event) {
   rv = close(event->listener);
 
   if (rv == -1) {
-    fprintf(stderr, "Failed to close listener file descriptor: %s\n",
-            strerror(errno));
+    perror("failed to close listener file descriptor");
     ret = -1;
   } else {
     printf("Listener file descriptor closed successfully\n");
@@ -103,8 +104,7 @@ int event_close(struct Event *event) {
   rv = close(event->epfd);
 
   if (rv == -1) {
-    fprintf(stderr, "Failed to close epoll file descriptor: %s\n",
-            strerror(errno));
+    perror("Failed to close epoll file descriptor");
     ret = -1;
   } else {
     printf("Epoll file descriptor closed successfully\n");

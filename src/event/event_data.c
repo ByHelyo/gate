@@ -1,7 +1,6 @@
 #include <event/event_data.h>
 
 #include <errno.h>
-#include <event/event.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

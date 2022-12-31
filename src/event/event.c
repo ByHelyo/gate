@@ -72,7 +72,7 @@ int event_accept(struct Event *event) {
     return -1; /* Accept failed */
   }
 
-  ev.events = EPOLLIN | EPOLLOUT;
+  ev.events = EPOLLIN;
   ev.data.fd = conn_sock;
 
   if (epoll_ctl(event->epfd, EPOLL_CTL_ADD, conn_sock, &ev) == -1) {

@@ -54,4 +54,15 @@ int listen_wrap(int sockfd, int backlog);
 int accept_wrap(int sockfd, struct sockaddr *restrict addr,
                 socklen_t *restrict addrlen);
 
+/**
+ * \brief Wrapper of send(2) syscall.
+ *
+ * @param sockfd file descriptor to send bytes.
+ * @param buf Bytes to send.
+ * @param len Number of bytes to send.
+ * @param flags Flags for send(2).
+ * @return Return 0 on success otherwise return -1.
+ */
+int send_wrap(int sockfd, const void *buf, size_t len, int flags);
+
 #endif // GATE_SOCKET_H

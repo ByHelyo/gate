@@ -6,6 +6,7 @@ add_library(core
         ${HEADER_LIST})
 
 target_link_libraries(core PRIVATE
-        event)
+        event
+        )
 
 target_include_directories(core PUBLIC ${gate_SOURCE_DIR}/include)

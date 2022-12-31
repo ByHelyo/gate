@@ -1,8 +1,11 @@
 #include <core/core.h>
 
+#include <event/event_data.h>
+
 int core_run(struct Event *event) {
   int running = 1;
   unsigned int current_ev;
+  struct EventData *event_data;
 
   while (running) {
     if (event_wait(event) == -1) {
@@ -10,8 +13,9 @@ int core_run(struct Event *event) {
     }
 
     for (current_ev = 0; current_ev < event->event_ready.size; ++current_ev) {
+      event_data = event->event_ready.events[current_ev].data.ptr;
 
-      if (event->event_ready.events[current_ev].data.fd == event->listener) {
+      if (event_data->fd == event->listener) {
         event_accept(event);
       }
     }

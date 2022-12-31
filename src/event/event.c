@@ -1,6 +1,7 @@
 #include <event/event.h>
 
 #include <errno.h>
+#include <event/event_data.h>
 #include <socket/listener.h>
 #include <socket/socket.h>
 #include <stdio.h>
@@ -27,7 +28,7 @@ int event_build(struct Event *event, const char *port,
     return -1;
   }
 
-  listener_ev.data.fd = event->listener;
+  listener_ev.data.ptr = build_event_data(event->listener);
   listener_ev.events = EPOLLIN;
 
   if (epoll_ctl(event->epfd, EPOLL_CTL_ADD, event->listener, &listener_ev) ==
@@ -73,7 +74,7 @@ int event_accept(struct Event *event) {
   }
 
   ev.events = EPOLLIN;
-  ev.data.fd = conn_sock;
+  ev.data.ptr = build_event_data(conn_sock);
 
   if (epoll_ctl(event->epfd, EPOLL_CTL_ADD, conn_sock, &ev) == -1) {
     fprintf(stderr, "Failed to add a new connection in epoll\n");

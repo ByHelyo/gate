@@ -46,17 +46,18 @@ int listen_wrap(int sockfd, int backlog) {
   return 0;
 }
 
-int accept_wrap(int sockfd, struct sockaddr *restrict addr,
+int accept_wrap(int listener_fd, struct sockaddr *restrict addr,
                 socklen_t *restrict addrlen) {
+  int sockfd = accept(listener_fd, addr, addrlen);
 
-  if (accept(sockfd, addr, addrlen) == -1) {
+  if (sockfd == -1) {
     fprintf(stderr,
             "Failed to accept the socket from the listener socket %i: %s\n",
             sockfd, strerror(errno));
     return -1;
   }
 
-  return 0;
+  return sockfd;
 }
 
 int send_wrap(int sockfd, const void *buf, size_t len, int flags) {

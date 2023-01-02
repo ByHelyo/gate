@@ -7,7 +7,7 @@
 
 static struct addrinfo build_hints_addrinfo(void);
 
-int build_listener_socket(const char *port, int listen_queue_backlog) {
+int build_listener_socket(const char *port) {
   int listener = -1; /* listener socket */
   int rv;            /* return value */
   struct addrinfo *p, *result;
@@ -41,7 +41,7 @@ int build_listener_socket(const char *port, int listen_queue_backlog) {
     return -1;
   }
 
-  rv = listen_wrap(listener, listen_queue_backlog);
+  rv = listen_wrap(listener, BACKLOG_LISTENER);
 
   if (rv == -1) {
     close_wrap(

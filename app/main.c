@@ -5,7 +5,7 @@ int main(void) {
   int rv;
   struct Event event;
 
-  rv = event_build(&event, "5173", 10);
+  rv = event_build(&event, "5173");
 
   if (rv == -1) {
     goto end; /* Failure, File descriptors are already closed. */

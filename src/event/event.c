@@ -8,8 +8,7 @@
 #include <string.h>
 #include <unistd.h>
 
-int event_build(struct Event *event, const char *port,
-                int listen_queue_backlog) {
+int event_build(struct Event *event, const char *port) {
   struct epoll_event listener_ev;
 
   if ((event->epfd = epoll_create1(0)) == -1) {
@@ -20,7 +19,7 @@ int event_build(struct Event *event, const char *port,
   printf("Epoll file descriptor created successfully (file descriptor %i)\n",
          event->epfd);
 
-  event->listener = build_listener_socket(port, listen_queue_backlog);
+  event->listener = build_listener_socket(port);
 
   if (event->listener == -1) {
     close_wrap(

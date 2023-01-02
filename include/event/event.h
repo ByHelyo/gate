@@ -40,12 +40,9 @@ struct Event {
  * @param event The event instance to build. Careful every fields will be
  * overwritten.
  * @param port Port to listen
- * @param listen_queue_backlog Maximum length to which the queue of pending
- * connections.
  * @return Return 0 on sucess otherwise return -1.
  */
-int event_build(struct Event *event, const char *port,
-                int listen_queue_backlog);
+int event_build(struct Event *event, const char *port);
 
 /**
  * \brief Wait for I/O events.

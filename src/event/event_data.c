@@ -8,6 +8,9 @@
 struct EventData *build_event_data(int fd) {
   struct EventData *event_data;
   if (fd < 0) {
+    fprintf(
+        stderr,
+        "Failed to build an EventData: A file descriptor cannot be negative\n");
     return NULL; /* File descriptor is non negative */
   }
 

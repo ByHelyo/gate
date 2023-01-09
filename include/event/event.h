@@ -14,7 +14,7 @@
  */
 struct EventReady {
   unsigned int size;                     /**< Number of events ready. */
-  struct epoll_event events[MAX_EVENTS]; /**< The events ready. */
+  struct epoll_event events[MAX_EVENTS]; /**< The ready events. */
 };
 
 /**

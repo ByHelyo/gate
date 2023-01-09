@@ -28,6 +28,10 @@ int event_build(struct Event *event, const char *port) {
   }
 
   listener_ev.data.ptr = build_event_data(event->listener);
+  if (listener_ev.data.ptr == NULL) {
+    return -1;
+  }
+
   listener_ev.events = EPOLLIN;
 
   if (epoll_ctl(event->epfd, EPOLL_CTL_ADD, event->listener, &listener_ev) ==
@@ -73,6 +77,9 @@ int event_accept(struct Event *event) {
 
   ev.events = EPOLLIN;
   ev.data.ptr = build_event_data(conn_sock);
+  if (ev.data.ptr == NULL) {
+    return -1;
+  }
 
   if (epoll_ctl(event->epfd, EPOLL_CTL_ADD, conn_sock, &ev) == -1) {
     fprintf(

@@ -3,32 +3,62 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int vec_build(struct Vec *vec, size_t size) {
+static int vec_extend_capacity(struct Vec *vec);
+
+int vec_build(struct Vec *vec) {
   vec->size = 0;
   vec->capacity = 2;
-  vec->elt_size = size;
-  vec->data = calloc(vec->capacity, sizeof(size));
+  vec->data = calloc(vec->capacity, sizeof(void *));
+
+  vec->data[0] = NULL;
+  vec->data[1] = NULL;
 
   if (vec->data == NULL) {
-    perror("Failed to build a vector");
+    fprintf(stderr, "Failed to allocate %zu bytes to build a vector",
+            sizeof(void *) * vec->capacity);
     return 0;
   }
 
   return 1;
 }
 
-int vec_push(struct Vec *vec, void *elt) { return 0; }
+void vec_destroy(struct Vec *vec, void (*free_func)(void *)) {
+  size_t idx = 0;
+  if (free_func != NULL) {
+    for (; idx < vec->size; ++idx) {
+      free_func(vec->data[idx]);
+    }
+  }
+
+  free(vec->data);
+}
+
+int vec_push(struct Vec *vec, void *elt) {
+  if (vec->size == vec->capacity) {
+    if (vec_extend_capacity(vec) == 0) {
+      return 0;
+    }
+  }
+
+  vec->data[vec->size] = elt;
+  ++vec->size;
+
+  return 1;
+}
 
 static int vec_extend_capacity(struct Vec *vec) {
   void *new_ptr;
   vec->capacity = vec->capacity * 2;
+  size_t new_size = vec->capacity * sizeof(void *);
 
-  new_ptr = realloc(vec->data, vec->capacity * vec->elt_size);
+  new_ptr = realloc(vec->data, new_size);
 
   if (new_ptr == NULL) {
+    fprintf(stderr, "Failed to allocate %zu bytes to expand a vector",
+            new_size);
     return 0;
   }
 
-  vec->data = new_ptr;
+  *vec->data = new_ptr;
   return 1;
 }

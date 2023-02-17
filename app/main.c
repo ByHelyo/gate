@@ -1,11 +1,13 @@
 #include <core/core.h>
 #include <stdio.h>
 
+#define PORT "5173"
+
 int main(void) {
   int rv;
   struct Event event;
 
-  rv = event_build(&event, "5173");
+  rv = event_build(&event, PORT);
 
   if (rv == -1) {
     goto end; /* Failure, File descriptors are already closed. */

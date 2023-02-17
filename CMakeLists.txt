@@ -1,11 +1,14 @@
-cmake_minimum_required(VERSION 3.23)
+cmake_minimum_required(VERSION 3.24)
 project(gate
         VERSION 1.0
         DESCRIPTION "HTTP reverse proxy"
-        LANGUAGES C)
+        LANGUAGES C CXX)
 
 set(CMAKE_C_COMPILER clang)
 set(CMAKE_C_STANDARD 99)
+
+SET(CMAKE_CXX_COMPILER clang++)
+set(CMAKE_CXX_STANDARD 14)
 
 add_compile_options(
         -Werror
@@ -15,7 +18,6 @@ add_compile_options(
         -pedantic
         -Wpedantic
         -fsanitize=address
-        -Weverything
         -Wdocumentation
         -Wshadow
         -Wdouble-promotion
@@ -45,3 +47,4 @@ endif()
 
 add_subdirectory(app)
 add_subdirectory(src)
+add_subdirectory(test)

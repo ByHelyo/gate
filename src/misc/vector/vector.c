@@ -10,9 +10,6 @@ int vec_build(struct Vec *vec) {
   vec->capacity = 2;
   vec->data = calloc(vec->capacity, sizeof(void *));
 
-  vec->data[0] = NULL;
-  vec->data[1] = NULL;
-
   if (vec->data == NULL) {
     fprintf(stderr, "Failed to allocate %zu bytes to build a vector",
             sizeof(void *) * vec->capacity);
@@ -59,6 +56,6 @@ static int vec_extend_capacity(struct Vec *vec) {
     return 0;
   }
 
-  *vec->data = new_ptr;
+  vec->data = new_ptr;
   return 1;
 }

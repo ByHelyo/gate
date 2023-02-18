@@ -1,6 +1,7 @@
 #ifndef GATE_EVENT_H
 #define GATE_EVENT_H
 
+#include <event/event_data.h>
 #include <sys/epoll.h>
 
 /*!
@@ -75,5 +76,13 @@ int event_accept(struct Event *event);
  * @return Return 0 on success, otherwise return -1.
  */
 int event_close(struct Event *event);
+
+/**
+ * \brief Read data from a connection.
+ *
+ * @param event_data Event data connection.
+ * @return Return 1 on success, 0 if the connection is closed or -1 on error.
+ */
+int event_read(struct EventData *event_data);
 
 #endif // GATE_EVENT_H

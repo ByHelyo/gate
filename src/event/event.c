@@ -1,7 +1,6 @@
 #include <event/event.h>
 
 #include <errno.h>
-#include <event/event_data.h>
 #include <socket/listener.h>
 #include <socket/socket.h>
 #include <stdio.h>
@@ -119,9 +118,15 @@ int event_close(struct Event *event) {
   return ret;
 }
 
-int event_read(struct Event *event) {
-  event = NULL;
-  if (event == NULL)
-    return 1;
-  return 0;
+int event_read(struct EventData *event_data) {
+  ssize_t rv;
+  char buffer[1024] = {0};
+
+  rv = recv_wrap(event_data->fd, buffer, 1024, 0);
+
+  if (rv == 0) {
+    return 0;
+  }
+
+  return rv == -1 ? -1 : 1;
 }

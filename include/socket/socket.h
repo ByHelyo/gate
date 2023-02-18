@@ -65,4 +65,16 @@ int accept_wrap(int listener_fd, struct sockaddr *restrict addr,
  */
 int send_wrap(int sockfd, const void *buf, size_t len, int flags);
 
+/**
+ * \brief Wrapper of recv(2) syscall.
+ *
+ * @param sockfd file descriptor to read.
+ * @param buf buffer to save data read from sockfd.
+ * @param len Size of the buffer.
+ * @param flags Flags for recv(2).
+ * @return Return 0 if file descriptor is closed. Return the number of bytes
+ * read or -1 on error.
+ */
+ssize_t recv_wrap(int sockfd, void *buf, size_t len, int flags);
+
 #endif // GATE_SOCKET_H

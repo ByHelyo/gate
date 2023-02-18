@@ -1,7 +1,7 @@
 #include <core/core.h>
 
 #include <event/event_data.h>
-
+#include <stdio.h>
 int core_run(struct Event *event) {
   int running = 1;
   unsigned int current_ev;
@@ -18,6 +18,8 @@ int core_run(struct Event *event) {
       if (event_data->fd == event->listener) {
         event_accept(event);
       } else {
+        if (event_read(event_data) == 0) {
+        }
       }
     }
   }

@@ -70,6 +70,8 @@ int send_wrap(int sockfd, const void *buf, size_t len, int flags) {
     n = send(sockfd, ptr_buf + total, bytes_left, flags);
 
     if (n == -1) {
+      fprintf(stderr, "Failed to send data to the socket %i: %s", sockfd,
+              strerror(errno));
       break;
     }
 
@@ -78,4 +80,18 @@ int send_wrap(int sockfd, const void *buf, size_t len, int flags) {
   }
 
   return total == len;
+}
+
+ssize_t recv_wrap(int sockfd, void *buf, size_t len, int flags) {
+  ssize_t ret;
+
+  ret = recv(sockfd, buf, len, flags);
+
+  if (ret == -1) {
+    fprintf(stderr, "Failed to receive data from the socket %i: %s", sockfd,
+            strerror(errno));
+    return -1;
+  }
+
+  return ret;
 }

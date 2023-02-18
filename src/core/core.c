@@ -17,6 +17,7 @@ int core_run(struct Event *event) {
 
       if (event_data->fd == event->listener) {
         event_accept(event);
+      } else {
       }
     }
   }

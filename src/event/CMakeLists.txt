@@ -8,7 +8,8 @@ add_library(event
         ${HEADER_LIST})
 
 target_link_libraries(event PRIVATE
-        socket)
+        socket
+        vector)
 
 target_include_directories(event PUBLIC ${gate_SOURCE_DIR}/include)
 

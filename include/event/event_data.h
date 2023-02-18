@@ -1,11 +1,14 @@
 #ifndef GATE_EVENT_DATA_H
 #define GATE_EVENT_DATA_H
 
+#include <misc/vector/vector.h>
+
 /**
  * Structure used to store data for an event.
  */
 struct EventData {
   int fd;
+  struct Vec data;
 };
 
 /**

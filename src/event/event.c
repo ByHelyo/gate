@@ -27,8 +27,7 @@ int event_build(struct Event *event, const char *port) {
     return -1;
   }
 
-  listener_ev.data.ptr = build_event_data(event->listener);
-  if (listener_ev.data.ptr == NULL) {
+  if ((listener_ev.data.ptr = build_event_data(event->listener)) == NULL) {
     return -1;
   }
 
@@ -76,8 +75,7 @@ int event_accept(struct Event *event) {
   }
 
   ev.events = EPOLLIN;
-  ev.data.ptr = build_event_data(conn_sock);
-  if (ev.data.ptr == NULL) {
+  if ((ev.data.ptr = build_event_data(conn_sock)) == NULL) {
     return -1;
   }
 
@@ -119,4 +117,11 @@ int event_close(struct Event *event) {
   printf("Event close successfully\n");
 
   return ret;
+}
+
+int event_read(struct Event *event) {
+  event = NULL;
+  if (event == NULL)
+    return 1;
+  return 0;
 }

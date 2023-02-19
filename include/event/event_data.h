@@ -12,10 +12,10 @@ struct EventData {
 };
 
 /**
- * \brief Build an EventData instance for a file descriptor.
+ * \brief Builds an EventData instance for a file descriptor.
  *
  * @param fd File descriptor bound to EventData.
- * @return Return EventData pointer. On error, return NULL.
+ * @return Returns EventData pointer. On error, returns NULL.
  */
 struct EventData *build_event_data(int fd);
 

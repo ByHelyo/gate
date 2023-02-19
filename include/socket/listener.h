@@ -8,10 +8,11 @@
 #define BACKLOG_LISTENER 20
 
 /**
- * Build the listener socket
+ * Builds the listener socket
  *
  * @param port Listener socket port.
- * @return Return the listener socket. On error, print the error and return -1.
+ * @return Returns the listener socket. On error, prints the error and returns
+ * -1.
  */
 int build_listener_socket(const char *port);
 

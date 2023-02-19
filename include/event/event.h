@@ -28,13 +28,13 @@ struct Event {
 };
 
 /**
- * \brief Build an event instance passed by argument. Event behaves
+ * \brief Builds an event instance passed by argument. Event behaves
  * level-triggered (LT).
  *
- * Create a new epoll instance and a listener socket.
- * Add the listener socket in the epoll instance as EPOLLIN.
+ * Creates a new epoll instance and a listener socket.
+ * Adds the listener socket in the epoll instance as EPOLLIN.
  *
- * If an error occurred. Return -1 and everything is freed properly.
+ * If an error occurred, returns -1 and everything is freed properly.
  *
  * EPOLLIN The associated file is available for read(2) operations.
  *
@@ -46,42 +46,42 @@ struct Event {
 int event_build(struct Event *event, const char *port);
 
 /**
- * \brief Wait for I/O events.
+ * \brief Waits for I/O events.
  *
  * Use epoll_wait(2) to wait events.
- * Fetch ready events and store them in event's member event_ready.
+ * Fetches ready events and stores them in event's member event_ready.
  *
  * @param event The event instance.
- * @return Return the number of events ready. On failure, return -1.
+ * @return Returns the number of events ready. On failure, returns -1.
  */
 int event_wait(struct Event *event);
 
 /**
- * \brief Accept a new connection and add it in epoll.
+ * \brief Accepts a new connection and adds it in epoll.
  *
- * Accept the new connection in listener socket.
- * Add the new connection in epoll.
+ * Accepts the new connection in listener socket.
+ * Adds the new connection in epoll.
  *
  * @param event The event instance.
- * @return On success, return 0 otherwise return -1.
+ * @return On success, returns 0 otherwise returns -1.
  */
 int event_accept(struct Event *event);
 
 /**
- * \brief Close the event instance.
+ * \brief Closes the event instance.
  *
- * Close the listener file descriptor then the epoll file descriptor.
+ * Closes the listener file descriptor then the epoll file descriptor.
  *
  * @param event The event instance.
- * @return Return 0 on success, otherwise return -1.
+ * @return Returns 0 on success, otherwise returns -1.
  */
 int event_close(struct Event *event);
 
 /**
- * \brief Read data from a connection.
+ * \brief Reads data from a connection.
  *
  * @param event_data Event data connection.
- * @return Return 1 on success, 0 if the connection is closed or -1 on error.
+ * @return Returns 1 on success, 0 if the connection is closed or -1 on error.
  */
 int event_read(struct EventData *event_data);
 

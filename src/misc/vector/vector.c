@@ -12,7 +12,7 @@ void vec_build(struct Vec *vec) {
   vec->data = NULL;
 }
 
-void vec_destroy(struct Vec *vec) {
+void vec_free(struct Vec *vec) {
   vec->capacity = 0;
   vec->size = 0;
   free(vec->data);

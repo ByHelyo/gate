@@ -15,7 +15,7 @@ int main(void) {
 
   rv = core_run(&event);
 
-  event_close(&event);
+  event_free(&event);
 
 end:
   fclose(stdin);

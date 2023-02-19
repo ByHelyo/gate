@@ -68,14 +68,14 @@ int event_wait(struct Event *event);
 int event_accept(struct Event *event);
 
 /**
- * \brief Closes the event instance.
+ * \brief Frees the event instance fields.
  *
  * Closes the listener file descriptor then the epoll file descriptor.
  *
  * @param event The event instance.
  * @return Returns 0 on success, otherwise returns -1.
  */
-int event_close(struct Event *event);
+int event_free(struct Event *event);
 
 /**
  * \brief Reads data from a connection.
@@ -84,5 +84,13 @@ int event_close(struct Event *event);
  * @return Returns 1 on success, 0 if the connection is closed or -1 on error.
  */
 int event_read(struct EventData *event_data);
+
+/**
+ * \brief Close a connection by closing its file descriptor.
+ *
+ * @param event_data Event data associated to the connection.
+ * @return Returns 0 on success otherwise returns -1.
+ */
+int event_close(struct EventData *event_data);
 
 #endif // GATE_EVENT_H

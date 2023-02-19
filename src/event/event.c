@@ -90,7 +90,7 @@ int event_accept(struct Event *event) {
   return 0;
 }
 
-int event_close(struct Event *event) {
+int event_free(struct Event *event) {
   int rv;
 
   int ret = 0;
@@ -133,4 +133,14 @@ int event_read(struct EventData *event_data) {
   vec_push_str(&event_data->data, buffer, (size_t)rv);
 
   return 1;
+}
+
+int event_close(struct EventData *event_data) {
+  int rv = 0;
+
+  vec_free(&event_data->data);
+
+  rv = close(event_data->fd);
+
+  return rv;
 }

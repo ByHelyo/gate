@@ -37,10 +37,10 @@ int vec_push(struct Vec *vec, char character);
 int vec_push_str(struct Vec *vec, char *buf, size_t len);
 
 /**
- * \brief Clears the vector.
+ * \brief Frees the vector data.
  *
  * @param vec The vector
  */
-void vec_destroy(struct Vec *vec);
+void vec_free(struct Vec *vec);
 
 #endif // GATE_VECTOR_H

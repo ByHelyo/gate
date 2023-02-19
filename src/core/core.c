@@ -5,6 +5,7 @@
 int core_run(struct Event *event) {
   int running = 1;
   int current_ev;
+  int rv;
   struct EventData *event_data;
 
   while (running) {
@@ -18,8 +19,16 @@ int core_run(struct Event *event) {
       if (event_data->fd == event->listener) {
         event_accept(event);
       } else {
-        if (event_read(event_data) == 0) {
-          event_read(event_data);
+        rv = event_read(event_data);
+
+        switch (rv) {
+        case 0:
+          event_close(event_data);
+          break;
+        case -1:
+          break;
+        default:
+          break;
         }
       }
     }

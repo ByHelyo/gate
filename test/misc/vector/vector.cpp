@@ -12,7 +12,7 @@ TEST(vector, build_vector) {
   ASSERT_EQ(vec.size, 0);
   ASSERT_EQ(vec.capacity, 0);
 
-  vec_destroy(&vec);
+  vec_free(&vec);
 }
 
 
@@ -20,7 +20,7 @@ TEST(vector, clear_vector) {
   struct Vec vec;
 
   vec_build(&vec);
-  vec_destroy(&vec);
+  vec_free(&vec);
 
   ASSERT_EQ(vec.capacity, 0);
   ASSERT_EQ(vec.size, 0);
@@ -37,7 +37,7 @@ TEST(vector, vector_push_one_element) {
   ASSERT_EQ(vec.capacity, 8);
   ASSERT_EQ(elt, vec.data[0]);
 
-  vec_destroy(&vec);
+  vec_free(&vec);
 }
 
 TEST(vector, vector_fill_capacity) {
@@ -73,7 +73,7 @@ TEST(vector, vector_fill_capacity) {
     ASSERT_EQ(elt_7, vec.data[6]);
     ASSERT_EQ(elt_8, vec.data[7]);
 
-    vec_destroy(&vec);
+    vec_free(&vec);
 }
 
 TEST(vector, vector_fill_to_expand) {
@@ -112,7 +112,7 @@ TEST(vector, vector_fill_to_expand) {
   ASSERT_EQ(elt_8, vec.data[7]);
   ASSERT_EQ(elt_9, vec.data[8]);
 
-  vec_destroy(&vec);
+  vec_free(&vec);
 }
 
 TEST(vector, vector_push_str_to_fill_no_expand) {
@@ -126,7 +126,7 @@ TEST(vector, vector_push_str_to_fill_no_expand) {
   ASSERT_EQ(vec.capacity, 8);
   ASSERT_EQ(strncmp(expected, vec.data, 8), 0);
 
-  vec_destroy(&vec);
+  vec_free(&vec);
 }
 
 TEST(vector, vector_push_str_to_expand) {
@@ -140,7 +140,7 @@ TEST(vector, vector_push_str_to_expand) {
   ASSERT_EQ(vec.capacity, 16);
   ASSERT_EQ(strncmp(expected, vec.data, strlen(expected)), 0);
 
-  vec_destroy(&vec);
+  vec_free(&vec);
 }
 
 TEST(vector, vector_push_long_str) {
@@ -154,5 +154,5 @@ TEST(vector, vector_push_long_str) {
   ASSERT_EQ(vec.capacity, 16);
   ASSERT_EQ(strncmp(expected, vec.data, strlen(expected)), 0);
 
-  vec_destroy(&vec);
+  vec_free(&vec);
 }

@@ -24,10 +24,7 @@ struct EventData *build_event_data(int fd) {
   }
 
   event_data->fd = fd;
-  if (vec_build(&event_data->data) == -1) {
-    free(event_data);
-    return NULL;
-  }
+  vec_build(&event_data->data);
 
   return event_data;
 }

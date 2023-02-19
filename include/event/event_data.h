@@ -7,8 +7,8 @@
  * Structure used to store data for an event.
  */
 struct EventData {
-  int fd;
-  struct Vec data;
+  int fd;          /**< File descriptor bound to this event data. */
+  struct Vec data; /**< Data received from the file descriptor. */
 };
 
 /**

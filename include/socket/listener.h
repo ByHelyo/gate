@@ -1,12 +1,6 @@
 #ifndef GATE_LISTENER_H
 #define GATE_LISTENER_H
 
-/*!
-  \def BACKLOG_LISTENER
-  Maximum number of connections allowed in the socket's listener queue.
-*/
-#define BACKLOG_LISTENER 20
-
 /**
  * Builds the listener socket
  *

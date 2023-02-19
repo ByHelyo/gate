@@ -14,7 +14,7 @@
  * EventReady stores results from epoll_wait(2) call.
  */
 struct EventReady {
-  unsigned int size;                     /**< Number of events ready. */
+  int size;                              /**< Number of events ready. */
   struct epoll_event events[MAX_EVENTS]; /**< The ready events. */
 };
 

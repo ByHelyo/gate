@@ -4,7 +4,7 @@
 
 int core_run(struct Event *event) {
   int running = 1;
-  unsigned int current_ev;
+  int current_ev;
   struct EventData *event_data;
 
   while (running) {

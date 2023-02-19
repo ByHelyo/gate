@@ -60,7 +60,7 @@ int event_wait(struct Event *event) {
 
   printf("%i events ready\n", nfds);
 
-  event->event_ready.size = (unsigned int)nfds;
+  event->event_ready.size = nfds;
 
   return 0;
 }

@@ -126,7 +126,11 @@ int event_read(struct EventData *event_data) {
 
   if (rv == 0) {
     return 0;
+  } else if (rv == -1) {
+    return -1;
   }
 
-  return rv == -1 ? -1 : 1;
+  vec_push_str(&event_data->data, buffer, (size_t)rv);
+
+  return 1;
 }

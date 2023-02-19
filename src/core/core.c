@@ -19,6 +19,7 @@ int core_run(struct Event *event) {
         event_accept(event);
       } else {
         if (event_read(event_data) == 0) {
+          event_read(event_data);
         }
       }
     }

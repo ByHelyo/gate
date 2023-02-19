@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 static int vec_extend_capacity(struct Vec *vec);
 
@@ -29,13 +30,26 @@ int vec_push(struct Vec *vec, char elt) {
   return 0;
 }
 
+int vec_push_str(struct Vec *vec, char *buf, size_t len) {
+  while (vec->size + len > vec->capacity) {
+    if (vec_extend_capacity(vec) == -1) {
+      return -1;
+    }
+  }
+
+  memcpy(vec->data + vec->size, buf, len);
+  vec->size += len;
+
+  return 0;
+}
+
 static int vec_extend_capacity(struct Vec *vec) {
   char *new_ptr;
 
   if (vec->capacity == 0) {
     vec->capacity = 8;
   } else {
-    vec->capacity = vec->capacity * 2;
+    vec->capacity = vec->capacity << 1;
   }
 
   size_t new_size = vec->capacity;

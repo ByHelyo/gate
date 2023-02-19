@@ -6,32 +6,30 @@
 struct Vec {
   size_t size;
   size_t capacity;
-  void **data;
+  char *data;
 };
 
 /**
- * \brief Build a vector.
+ * \brief Builds a vector.
  *
  * @param vec The vector.
- * @return On success, return 0 otherwise return -1.
  */
-int vec_build(struct Vec *vec);
+void vec_build(struct Vec *vec);
 
 /**
- * \brief Add an element to the vector.
+ * \brief Appends a character to the back of a collection.
  *
  * @param vec The vector.
- * @param elt The element to add.
+ * @param character The character to add.
  * @return Return 0 on success otherwise return -1.
  */
-int vec_push(struct Vec *vec, void *elt);
+int vec_push(struct Vec *vec, char character);
 
 /**
- * \brief Clear the vector.
+ * \brief Clears the vector.
  *
  * @param vec The vector
- * @param free_func Free function used to free elements.
  */
-void vec_clear(struct Vec *vec, void (*free_func)(void *));
+void vec_destroy(struct Vec *vec);
 
 #endif // GATE_VECTOR_H

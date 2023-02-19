@@ -1,7 +1,7 @@
 #include <core/core.h>
 
 #include <event/event_data.h>
-#include <stdio.h>
+
 int core_run(struct Event *event) {
   int running = 1;
   unsigned int current_ev;

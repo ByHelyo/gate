@@ -3,6 +3,7 @@
 #include <errno.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/socket.h>
 #include <unistd.h>
 
 int close_wrap(int fd) {
@@ -36,8 +37,8 @@ int bind_wrap(int sockfd, const struct sockaddr *addr, socklen_t addrlen) {
   return 0;
 }
 
-int listen_wrap(int sockfd, int backlog) {
-  if (listen(sockfd, backlog) == -1) {
+int listen_wrap(int sockfd) {
+  if (listen(sockfd, SOMAXCONN) == -1) {
     fprintf(stderr, "Failed to listen for file descriptor %i: %s\n", sockfd,
             strerror(errno));
     return -1;

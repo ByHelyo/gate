@@ -36,10 +36,9 @@ int bind_wrap(int sockfd, const struct sockaddr *addr, socklen_t addrlen);
  * \brief Wrapper of listen(2) syscall.
  *
  * @param sockfd Socket file descriptor to listen.
- * @param backlog Maximum length to which the queue of pending connections.
  * @return Returns 0 on sucess otherwise returns -1.
  */
-int listen_wrap(int sockfd, int backlog);
+int listen_wrap(int sockfd);
 
 /**
  *

@@ -41,7 +41,7 @@ int build_listener_socket(const char *port) {
     return -1;
   }
 
-  rv = listen_wrap(listener, BACKLOG_LISTENER);
+  rv = listen_wrap(listener);
 
   if (rv == -1) {
     close_wrap(

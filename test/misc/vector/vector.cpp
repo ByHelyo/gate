@@ -76,7 +76,7 @@ TEST(vector, vector_fill_capacity) {
     vec_free(&vec);
 }
 
-TEST(vector, vector_fill_to_expand) {
+TEST(vector, vector_fill_to_grow) {
   struct Vec vec;
   char elt_1 = 'v';
   char elt_2 = 'o';
@@ -115,7 +115,7 @@ TEST(vector, vector_fill_to_expand) {
   vec_free(&vec);
 }
 
-TEST(vector, vector_push_str_to_fill_no_expand) {
+TEST(vector, vector_push_str_to_fill_no_grow) {
   struct Vec vec;
   char expected[] = "Password";
 
@@ -129,7 +129,7 @@ TEST(vector, vector_push_str_to_fill_no_expand) {
   vec_free(&vec);
 }
 
-TEST(vector, vector_push_str_to_expand) {
+TEST(vector, vector_push_str_to_grow) {
   struct Vec vec;
   char expected[] = "Technique";
 

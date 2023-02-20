@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int vec_extend_capacity(struct Vec *vec);
+static int vec_grow(struct Vec *vec);
 
 void vec_build(struct Vec *vec) {
   vec->size = 0;
@@ -20,7 +20,7 @@ void vec_free(struct Vec *vec) {
 
 int vec_push(struct Vec *vec, char elt) {
   if (vec->size == vec->capacity) {
-    if (vec_extend_capacity(vec) == -1) {
+    if (vec_grow(vec) == -1) {
       return -1;
     }
   }
@@ -32,7 +32,7 @@ int vec_push(struct Vec *vec, char elt) {
 
 int vec_push_str(struct Vec *vec, char *buf, size_t len) {
   while (vec->size + len > vec->capacity) {
-    if (vec_extend_capacity(vec) == -1) {
+    if (vec_grow(vec) == -1) {
       return -1;
     }
   }
@@ -43,7 +43,7 @@ int vec_push_str(struct Vec *vec, char *buf, size_t len) {
   return 0;
 }
 
-static int vec_extend_capacity(struct Vec *vec) {
+static int vec_grow(struct Vec *vec) {
   char *new_ptr;
 
   if (vec->capacity == 0) {
@@ -57,8 +57,7 @@ static int vec_extend_capacity(struct Vec *vec) {
   new_ptr = realloc(vec->data, new_size);
 
   if (new_ptr == NULL) {
-    fprintf(stderr, "Failed to allocate %zu bytes to expand a vector",
-            new_size);
+    fprintf(stderr, "Failed to allocate %zu bytes to grow a vector", new_size);
     return -1;
   }
 

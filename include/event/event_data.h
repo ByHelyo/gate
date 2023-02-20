@@ -17,6 +17,14 @@ struct EventData {
  * @param fd File descriptor bound to EventData.
  * @return Returns EventData pointer. On error, returns NULL.
  */
-struct EventData *build_event_data(int fd);
+struct EventData *eventdata_build(int fd);
+
+/**
+ * \brief Free all fields associated with event_data and event_data itself.
+ *
+ * @param event_data The event data to free.
+ * @return Returns 0 on success otherwise returns -1.
+ */
+int eventdata_destroy(struct EventData *event_data);
 
 #endif // GATE_EVENT_DATA_H

@@ -5,7 +5,6 @@
 #include <socket/socket.h>
 #include <stdio.h>
 #include <string.h>
-#include <unistd.h>
 
 int event_build(struct Event *event, const char *port) {
   struct epoll_event listener_ev;
@@ -26,7 +25,7 @@ int event_build(struct Event *event, const char *port) {
     return -1;
   }
 
-  if ((listener_ev.data.ptr = build_event_data(event->listener)) == NULL) {
+  if ((listener_ev.data.ptr = eventdata_build(event->listener)) == NULL) {
     return -1;
   }
 
@@ -74,7 +73,7 @@ int event_accept(struct Event *event) {
   }
 
   ev.events = EPOLLIN;
-  if ((ev.data.ptr = build_event_data(conn_sock)) == NULL) {
+  if ((ev.data.ptr = eventdata_build(conn_sock)) == NULL) {
     return -1;
   }
 
@@ -95,7 +94,7 @@ int event_free(struct Event *event) {
 
   int ret = 0;
 
-  rv = close(event->listener);
+  rv = close_wrap(event->listener);
 
   if (rv == -1) {
     perror("failed to close listener file descriptor");
@@ -104,7 +103,7 @@ int event_free(struct Event *event) {
     printf("Listener file descriptor closed successfully\n");
   }
 
-  rv = close(event->epfd);
+  rv = close_wrap(event->epfd);
 
   if (rv == -1) {
     perror("Failed to close epoll file descriptor");
@@ -136,11 +135,5 @@ int event_read(struct EventData *event_data) {
 }
 
 int event_close(struct EventData *event_data) {
-  int rv = 0;
-
-  vec_free(&event_data->data);
-
-  rv = close(event_data->fd);
-
-  return rv;
+  return eventdata_destroy(event_data);
 }

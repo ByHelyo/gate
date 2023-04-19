@@ -23,7 +23,6 @@
             valgrind
             doxygen
             clang-tools
-            gtest
           ];
         };
       }

@@ -7,9 +7,6 @@ project(gate
 set(CMAKE_C_COMPILER clang)
 set(CMAKE_C_STANDARD 99)
 
-SET(CMAKE_CXX_COMPILER clang++)
-set(CMAKE_CXX_STANDARD 14)
-
 add_compile_options(
         -Werror
         -Wall
@@ -47,4 +44,3 @@ endif()
 
 add_subdirectory(app)
 add_subdirectory(src)
-add_subdirectory(test)

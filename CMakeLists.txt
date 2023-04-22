@@ -7,6 +7,8 @@ project(gate
 set(CMAKE_C_COMPILER clang)
 set(CMAKE_C_STANDARD 99)
 
+set(CMAKE_CXX_STANDARD 14)
+
 add_compile_options(
         -Werror
         -Wall
@@ -40,6 +42,13 @@ if (Doxygen_FOUND)
     add_subdirectory(docs)
 else()
     message(STATUS "Doxygen not found, not building docs")
+endif()
+
+find_package(GTest)
+if(GTest_FOUND)
+    add_subdirectory(test)
+else()
+    message(STATUS "GTest not found, not building test")
 endif()
 
 add_subdirectory(app)

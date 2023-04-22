@@ -1,10 +1,12 @@
-#include "misc/vector/vector.h"
+#include <misc/vector/vector.h>
 
+#include <misc/math/math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-static int vec_grow(struct Vec *vec);
+static int vec_grow(struct Vec *vec, size_t *capacity);
+static int vec_allocate(struct Vec *vec, size_t size);
 
 void vec_build(struct Vec *vec) {
   vec->size = 0;
@@ -20,21 +22,20 @@ void vec_free(struct Vec *vec) {
 
 int vec_push(struct Vec *vec, char elt) {
   if (vec->size == vec->capacity) {
-    if (vec_grow(vec) == -1) {
+    if (vec_grow(vec, NULL) == -1) {
       return -1;
     }
   }
 
   vec->data[vec->size] = elt;
   ++vec->size;
+
   return 0;
 }
 
 int vec_push_str(struct Vec *vec, char *buf, size_t len) {
-  while (vec->size + len > vec->capacity) {
-    if (vec_grow(vec) == -1) {
-      return -1;
-    }
+  if (vec_grow(vec, &len) == -1) {
+    return -1;
   }
 
   memcpy(vec->data + vec->size, buf, len);
@@ -43,21 +44,35 @@ int vec_push_str(struct Vec *vec, char *buf, size_t len) {
   return 0;
 }
 
-static int vec_grow(struct Vec *vec) {
-  char *new_ptr;
+void vec_print(struct Vec *vec) {
+  printf("vector: %.*s", vec->size, vec->data);
+}
 
-  if (vec->capacity == 0) {
-    vec->capacity = 8;
+static int vec_grow(struct Vec *vec, size_t *capacity) {
+  size_t new_capacity;
+
+  if (capacity == NULL) {
+    if (vec->capacity == 0) {
+      new_capacity = 8;
+    } else {
+      new_capacity = vec->capacity << 1;
+    }
   } else {
-    vec->capacity = vec->capacity << 1;
+    new_capacity = next_pow2(*capacity);
   }
 
-  size_t new_size = vec->capacity;
+  return vec_allocate(vec, new_capacity);
+}
 
-  new_ptr = realloc(vec->data, new_size);
+static int vec_allocate(struct Vec *vec, size_t size) {
+  char *new_ptr;
+
+  vec->capacity = size;
+
+  new_ptr = realloc(vec->data, size);
 
   if (new_ptr == NULL) {
-    fprintf(stderr, "Failed to allocate %zu bytes to grow a vector", new_size);
+    fprintf(stderr, "Failed to allocate %zu bytes to grow a vector", size);
     return -1;
   }
 

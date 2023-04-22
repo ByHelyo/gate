@@ -39,8 +39,15 @@ int vec_push_str(struct Vec *vec, char *buf, size_t len);
 /**
  * \brief Frees the vector data.
  *
- * @param vec The vector
+ * @param vec The vector.
  */
 void vec_free(struct Vec *vec);
+
+/**
+ * \brief Print the vector.
+ *
+ * @param vec Vector to print.
+ */
+void vec_print(struct Vec *vec);
 
 #endif // GATE_VECTOR_H

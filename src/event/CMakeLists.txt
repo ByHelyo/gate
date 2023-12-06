@@ -12,4 +12,3 @@ target_link_libraries(event PRIVATE
         vector)
 
 target_include_directories(event PUBLIC ${gate_SOURCE_DIR}/include)
-

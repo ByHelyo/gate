@@ -2,4 +2,4 @@ add_subdirectory(socket)
 add_subdirectory(event)
 add_subdirectory(core)
 add_subdirectory(misc)
-
+add_subdirectory(logger)

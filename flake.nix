@@ -2,7 +2,7 @@
   description = "Shell";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs.url = "nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -17,7 +17,7 @@
       {
         devShells.default = mkShell.override { stdenv = pkgs.clangStdenv; } {
           packages = [
-            clang_15
+            clang_16
             cmake
             gdb
             valgrind

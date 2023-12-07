@@ -1,26 +1,24 @@
 #include <event/event_data.h>
 
 #include <errno.h>
+#include <logger/log.h>
 #include <socket/socket.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 struct EventData *eventdata_build(int fd) {
   struct EventData *event_data;
   if (fd < 0) {
-    fprintf(
-        stderr,
-        "Failed to build an EventData: A file descriptor cannot be negative\n");
+    log_error(
+        "failed to build an EventData: a file descriptor cannot be negative");
     return NULL; /* File descriptor is non negative */
   }
 
   event_data = calloc(1, sizeof(struct EventData));
 
   if (event_data == NULL) {
-    fprintf(stderr,
-            "Allocation of EventData for file descriptor %i failed : %s\n", fd,
-            strerror(errno));
+    log_error("allocation of EventData for file descriptor '%i' failed: %s", fd,
+              strerror(errno));
     return NULL;
   }
 

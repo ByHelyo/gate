@@ -7,6 +7,7 @@ add_library(vector
 
 target_link_libraries(vector PRIVATE
         math
+        logger
         )
 
 target_include_directories(vector PUBLIC ${gate_SOURCE_DIR}/include)

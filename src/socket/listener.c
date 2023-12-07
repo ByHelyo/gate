@@ -1,8 +1,8 @@
 #include <socket/listener.h>
 
+#include <logger/log.h>
 #include <netdb.h>
 #include <socket/socket.h>
-#include <stdio.h>
 #include <string.h>
 
 static struct addrinfo build_hints_addrinfo(void);
@@ -16,8 +16,7 @@ int build_listener_socket(const char *port) {
   rv = getaddrinfo(NULL, port, &hints, &result);
 
   if (rv != 0) {
-    fprintf(stderr, "getaddrinfo failed for listener socket: %s\n",
-            gai_strerror(rv));
+    log_error("getaddrinfo failed for listener socket: %s", gai_strerror(rv));
     return -1;
   }
 
@@ -49,8 +48,7 @@ int build_listener_socket(const char *port) {
     return -1;
   }
 
-  printf("Listener socket created successfully (file descriptor %i)\n",
-         listener);
+  log_info("listener socket '%i' created successfully", listener);
 
   return listener;
 }

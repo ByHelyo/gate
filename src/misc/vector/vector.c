@@ -1,7 +1,7 @@
 #include <misc/vector/vector.h>
 
+#include <logger/log.h>
 #include <misc/math/math.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -45,7 +45,7 @@ int vec_push_str(struct Vec *vec, char *buf, size_t len) {
 }
 
 void vec_print(struct Vec *vec) {
-  printf("vector: %.*s", vec->size, vec->data);
+  log_info("vector: %.*s", vec->size, vec->data);
 }
 
 static int vec_grow(struct Vec *vec, size_t *capacity) {
@@ -72,7 +72,7 @@ static int vec_allocate(struct Vec *vec, size_t size) {
   new_ptr = realloc(vec->data, size);
 
   if (new_ptr == NULL) {
-    fprintf(stderr, "Failed to allocate %zu bytes to grow a vector", size);
+    log_error("failed to allocate %zu bytes for grow a vector", size);
     return -1;
   }
 

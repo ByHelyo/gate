@@ -1,21 +1,20 @@
 #include <event/event.h>
 
 #include <errno.h>
+#include <logger/log.h>
 #include <socket/listener.h>
 #include <socket/socket.h>
-#include <stdio.h>
 #include <string.h>
 
 int event_build(struct Event *event, const char *port) {
   struct epoll_event listener_ev;
 
   if ((event->epfd = epoll_create1(0)) == -1) {
-    perror("Failed to create epoll instance");
+    log_error("failed to create epoll instance: %s", strerror(errno));
     return -1;
   }
 
-  printf("Epoll file descriptor created successfully (file descriptor %i)\n",
-         event->epfd);
+  log_info("epoll file descriptor '%i' created successfully", event->epfd);
 
   event->listener = build_listener_socket(port);
 
@@ -33,7 +32,7 @@ int event_build(struct Event *event, const char *port) {
 
   if (epoll_ctl(event->epfd, EPOLL_CTL_ADD, event->listener, &listener_ev) ==
       -1) {
-    perror("Failed to add listener socket in epoll");
+    log_error("failed to add listener socket in epoll: %s", strerror(errno));
 
     // Failed to add listener in epoll. Free listener and epoll file
     // descriptors.
@@ -43,7 +42,7 @@ int event_build(struct Event *event, const char *port) {
     return -1;
   }
 
-  printf("Event created successfully\n");
+  log_info("event created successfully");
 
   return 0;
 }
@@ -52,12 +51,12 @@ int event_wait(struct Event *event) {
   int nfds = epoll_wait(event->epfd, event->event_ready.events, MAX_EVENTS, -1);
 
   if (nfds == -1) {
-    perror("Waiting for events failed");
+    log_error("waiting for events failed: %s", strerror(errno));
 
     return -1;
   }
 
-  printf("%i events ready\n", nfds);
+  log_info("%i events ready", nfds);
 
   event->event_ready.size = nfds;
 
@@ -78,9 +77,8 @@ int event_accept(struct Event *event) {
   }
 
   if (epoll_ctl(event->epfd, EPOLL_CTL_ADD, conn_sock, &ev) == -1) {
-    fprintf(
-        stderr,
-        "Failed to add a new connection (file descriptor %i) in epoll: %s\n",
+    log_error(
+        "failed to add a new connection (file descriptor %i) to epoll: %s",
         conn_sock, strerror(errno));
     close_wrap(conn_sock); /* Free the connection socket. */
     return -1;
@@ -97,22 +95,22 @@ int event_free(struct Event *event) {
   rv = close_wrap(event->listener);
 
   if (rv == -1) {
-    perror("failed to close listener file descriptor");
+    log_error("failed to close listener file descriptor: %s", strerror(errno));
     ret = -1;
   } else {
-    printf("Listener file descriptor closed successfully\n");
+    log_info("listener file descriptor closed successfully");
   }
 
   rv = close_wrap(event->epfd);
 
   if (rv == -1) {
-    perror("Failed to close epoll file descriptor");
+    log_error("failed to close epoll file descriptor: %s", strerror(errno));
     ret = -1;
   } else {
-    printf("Epoll file descriptor closed successfully\n");
+    log_info("epoll file descriptor closed successfully");
   }
 
-  printf("Event close successfully\n");
+  log_info("event closed sucessfully");
 
   return ret;
 }

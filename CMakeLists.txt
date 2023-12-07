@@ -10,6 +10,10 @@ set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 14)
 
 add_compile_options(
+        -DLOG_USE_COLOR
+)
+
+add_compile_options(
         -Werror
         -Wall
         -Wextra
@@ -20,7 +24,7 @@ add_compile_options(
         -Wdocumentation
         -Wshadow
         -Wdouble-promotion
-        -Wformat=2
+        #-Wformat=2
         -Wundef
         -fno-common
         -Wconversion

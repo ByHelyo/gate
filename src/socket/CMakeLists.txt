@@ -7,5 +7,9 @@ add_library(socket
         listener.c
         ${HEADER_LIST})
 
+target_link_libraries(socket PRIVATE
+        logger
+)
+
 target_include_directories(socket PUBLIC ${gate_SOURCE_DIR}/include)
 

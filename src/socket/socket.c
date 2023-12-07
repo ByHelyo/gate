@@ -1,15 +1,16 @@
 #include <socket/socket.h>
 
 #include <errno.h>
-#include <stdio.h>
+#include <logger/log.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
 
 int close_wrap(int fd) {
   if (close(fd) == -1) {
-    fprintf(stderr, "Failed to close the file descriptor %i: %s\n", fd,
-            strerror(errno));
+    log_error("failed to close the file descriptor '%i': %s", fd,
+              strerror(errno));
+
     return -1;
   }
 
@@ -20,7 +21,8 @@ int socket_wrap(int domain, int type, int protocol) {
   int sockfd = socket(domain, type, protocol);
 
   if (sockfd == -1) {
-    perror("Socket failed to create an endpoint for communication");
+    log_error("socket failed to create an endpoint for communication: %s",
+              strerror(errno));
     return -1;
   }
 
@@ -29,8 +31,8 @@ int socket_wrap(int domain, int type, int protocol) {
 
 int bind_wrap(int sockfd, const struct sockaddr *addr, socklen_t addrlen) {
   if (bind(sockfd, addr, addrlen) == -1) {
-    fprintf(stderr, "Bind failed for file descriptor %i: %s\n", sockfd,
-            strerror(errno));
+    log_error("bind failed for file descriptor '%i': %s", sockfd,
+              strerror(errno));
     return -1;
   }
 
@@ -39,8 +41,8 @@ int bind_wrap(int sockfd, const struct sockaddr *addr, socklen_t addrlen) {
 
 int listen_wrap(int sockfd) {
   if (listen(sockfd, SOMAXCONN) == -1) {
-    fprintf(stderr, "Failed to listen for file descriptor %i: %s\n", sockfd,
-            strerror(errno));
+    log_error("failed to listen for file descriptor '%i': %s", sockfd,
+              strerror(errno));
     return -1;
   }
 
@@ -52,9 +54,8 @@ int accept_wrap(int listener_fd, struct sockaddr *restrict addr,
   int sockfd = accept(listener_fd, addr, addrlen);
 
   if (sockfd == -1) {
-    fprintf(stderr,
-            "Failed to accept the socket from the listener socket %i: %s\n",
-            sockfd, strerror(errno));
+    log_error("Failed to accept the socket from the listener socket '%i': %s",
+              sockfd, strerror(errno));
     return -1;
   }
 
@@ -71,8 +72,8 @@ int send_wrap(int sockfd, const void *buf, size_t len, int flags) {
     n = send(sockfd, ptr_buf + total, bytes_left, flags);
 
     if (n == -1) {
-      fprintf(stderr, "Failed to send data to the socket %i: %s", sockfd,
-              strerror(errno));
+      log_error("failed to send data to the socket '%i': %s", sockfd,
+                strerror(errno));
       break;
     }
 
@@ -89,8 +90,8 @@ ssize_t recv_wrap(int sockfd, void *buf, size_t len, int flags) {
   ret = recv(sockfd, buf, len, flags);
 
   if (ret == -1) {
-    fprintf(stderr, "Failed to receive data from the socket %i: %s", sockfd,
-            strerror(errno));
+    log_error("failed to receive data from the socket '%i': %s", sockfd,
+              strerror(errno));
     return -1;
   }
 

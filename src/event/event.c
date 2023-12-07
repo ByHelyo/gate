@@ -84,6 +84,8 @@ int event_accept(struct Event *event) {
     return -1;
   }
 
+  log_info("new connection with file descriptor '%i'", conn_sock);
+
   return 0;
 }
 

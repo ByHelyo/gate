@@ -1,4 +1,5 @@
 #include <core/core.h>
+#include <logger/log.h>
 #include <stdio.h>
 
 #define PORT "5173"
@@ -8,6 +9,7 @@ int main(void) {
   struct Event event;
 
   rv = event_build(&event, PORT);
+  log_info("listening on http://localhost:%s", PORT);
 
   if (rv == -1) {
     goto end; /* Failure, File descriptors are already closed. */

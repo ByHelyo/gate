@@ -1,7 +1,9 @@
 #include <event/event_data.h>
 
+#include "http/request/request.h"
 #include <errno.h>
 #include <logger/log.h>
+#include <misc/vector/iter.h>
 #include <socket/socket.h>
 #include <stdlib.h>
 #include <string.h>
@@ -41,7 +43,10 @@ int eventdata_destroy(struct EventData *event_data) {
 }
 
 int eventdata_parse(struct EventData *event_data) {
-  event_data = (void *)event_data;
+  struct IterVec iter_vec;
+  iter_vec_build(&iter_vec, &event_data->data);
+
+  request_parse(&iter_vec);
 
   return 0;
 }

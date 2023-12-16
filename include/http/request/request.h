@@ -25,6 +25,6 @@ enum ParseResult {
  *         'Ok' indicates successful parsing; other values may represent
  * specific errors.
  */
-enum ParseResult request_parse(struct IterVec *http)
+enum ParseResult request_parse(struct IterVec *http);
 
 #endif // GATE_REQUEST_H

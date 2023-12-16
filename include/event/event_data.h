@@ -27,4 +27,14 @@ struct EventData *eventdata_build(int fd);
  */
 int eventdata_destroy(struct EventData *event_data);
 
+/**
+ * \brief Checks if the provided event data contains necessary information for
+ * constructing an HTTP request.
+ *
+ * @param event_data The event data containing data for the HTTP request.
+ * @return Returns 1 if the HTTP request can be constructed using the given
+ * event data, otherwise returns 0.
+ */
+int eventdata_parse(struct EventData *event_data);
+
 #endif // GATE_EVENT_DATA_H

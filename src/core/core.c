@@ -20,6 +20,7 @@ int core_run(struct Event *event) {
         event_accept(event);
       } else {
         rv = event_read(event_data);
+        eventdata_parse(event_data);
 
         switch (rv) {
         case 0:

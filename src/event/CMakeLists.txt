@@ -10,6 +10,8 @@ add_library(event
 target_link_libraries(event PRIVATE
         socket
         logger
-        vector)
+        vector
+        request
+)
 
 target_include_directories(event PUBLIC ${gate_SOURCE_DIR}/include)

@@ -39,3 +39,9 @@ int eventdata_destroy(struct EventData *event_data) {
 
   return rv;
 }
+
+int eventdata_parse(struct EventData *event_data) {
+  event_data = (void *)event_data;
+
+  return 0;
+}

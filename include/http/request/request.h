@@ -4,13 +4,13 @@
 #include <misc/vector/iter.h>
 
 /**
- * @enum ParseError
- * \brief Represents different parsing errors during HTTP request parsing.
+ * @enum ParseResult
+ * \brief Represents different parsing outcomes during HTTP request parsing.
  *
- * This enumeration defines potential error types that might occur
- * during the parsing of an HTTP request using request_parse function.
+ * This enumeration defines potential outcomes that might arise
+ * during the parsing of an HTTP request using the request_parse function.
  */
-enum ParseError {
+enum ParseResult {
   Ok,
 };
 
@@ -18,13 +18,13 @@ enum ParseError {
  * \brief Parse an HTTP request from the given iterator.
  *
  * This function attempts to parse an HTTP request using the provided iterator
- * over the Vec structure, representing the HTTP content.
+ * over the Vec structure, which represents the HTTP content.
  *
  * @param http Pointer to the iterator over the Vec containing HTTP content.
- * @return Returns an instance of ParseError representing the parsing result.
- *         Ok indicates successful parsing; other values represent specific
- * errors.
+ * @return Returns an instance of ParseResult representing the parsing outcome.
+ *         'Ok' indicates successful parsing; other values may represent
+ * specific errors.
  */
-enum ParseError request_parse(struct IterVec *http);
+enum ParseResult request_parse(struct IterVec *http)
 
 #endif // GATE_REQUEST_H

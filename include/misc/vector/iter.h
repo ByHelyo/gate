@@ -7,19 +7,19 @@
  * @enum IterStatus
  * \brief Represents the status of an iterator.
  *
- * Enumerates the possible states an iterator can have: Some (indicating a valid
- * value) and None (indicating no value).
+ * Enumerates the possible states an iterator can have: IterOk (indicating a
+ * valid value) and IterErr (indicating no value).
  */
 enum IterStatus {
-  Some, // Iterator has a valid value
-  None  // Iterator has no value
+  IterOk, // Iterator has a valid value
+  IterErr // Iterator has no value
 };
 
 /**
  * @struct IterResult
  * \brief Represents the result of an iteration.
  *
- * Contains the status of the iterator (Some or None) and the associated
+ * Contains the status of the iterator (IterOk or IterErr) and the associated
  * character 'ch'.
  */
 struct IterResult {
@@ -58,9 +58,24 @@ void iter_vec_build(struct IterVec *iter_vec, struct Vec *vec);
  * @param iter_vec Pointer to the iterator over the Vec.
  * @return Returns an IterResult structure containing the status and the next
  * element. The 'status' field in the returned structure indicates if the
- * iterator has a valid value (IterStatus Some) or not (IterStatus None). The
- * 'ch' field contains the character associated with the iterator status.
+ * iterator has a valid value (IterStatus IterOk) or not (IterStatus IterErr).
+ * The 'ch' field contains the character associated with the iterator status.
  */
 struct IterResult iter_vec_peek(struct IterVec *iter_vec);
+
+/**
+ * \brief Retrieve the next element in the Vec using the iterator.
+ *
+ * Retrieves the next element from the Vec being iterated by the provided
+ * iterator without advancing the iterator position.
+ *
+ * @param iter_vec Pointer to the iterator over the Vec.
+ * @return Returns an IterResult structure containing the status and the next
+ * element. The 'status' field in the returned structure indicates whether the
+ * iterator has a valid value (IterStatus IterOk) or not (IterStatus IterErr).
+ * If the iterator has a valid value, 'ch' contains the character associated
+ * with the iterator status.
+ */
+struct IterResult iter_vec_next(struct IterVec *iter_vec);
 
 #endif // GATE_ITER_H

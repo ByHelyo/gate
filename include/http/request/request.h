@@ -11,7 +11,8 @@ struct IterVec;
  * during the parsing of an HTTP request using the request_parse function.
  */
 enum ParseResult {
-  Ok,
+  ParseOk,
+  ParseErr,
 };
 
 /**

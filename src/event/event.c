@@ -1,6 +1,7 @@
 #include <event/event.h>
 
 #include <errno.h>
+#include <event/event_data.h>
 #include <logger/log.h>
 #include <socket/listener.h>
 #include <socket/socket.h>

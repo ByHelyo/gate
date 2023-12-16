@@ -1,8 +1,9 @@
 #ifndef GATE_EVENT_H
 #define GATE_EVENT_H
 
-#include <event/event_data.h>
 #include <sys/epoll.h>
+
+struct EventData;
 
 /*!
   \def MAX_EVENTS

@@ -1,7 +1,7 @@
 #ifndef GATE_REQUEST_H
 #define GATE_REQUEST_H
 
-#include <misc/vector/iter.h>
+struct IterVec;
 
 /**
  * @enum ParseResult

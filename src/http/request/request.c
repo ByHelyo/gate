@@ -1,4 +1,6 @@
 #include <http/request/request.h>
+
+#include <misc/vector/iter.h>
 #include <stdio.h>
 
 enum ParseResult method_parse(struct IterVec *http) {

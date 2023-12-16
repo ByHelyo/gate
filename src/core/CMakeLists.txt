@@ -7,7 +7,6 @@ add_library(core
 
 target_link_libraries(core PRIVATE
         event
-        logger
         )
 
 target_include_directories(core PUBLIC ${gate_SOURCE_DIR}/include)

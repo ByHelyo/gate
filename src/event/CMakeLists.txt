@@ -9,8 +9,6 @@ add_library(event
 
 target_link_libraries(event PRIVATE
         socket
-        logger
-        vector
         request
 )
 

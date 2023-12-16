@@ -1,5 +1,6 @@
 add_executable(gate
-        main.c)
+        main.c
+)
 
 target_link_libraries(gate PRIVATE
         core

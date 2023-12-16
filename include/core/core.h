@@ -1,7 +1,7 @@
 #ifndef GATE_CORE_H
 #define GATE_CORE_H
 
-#include <event/event.h>
+#include "event/event.h"
 
 int core_run(struct Event *event);
 

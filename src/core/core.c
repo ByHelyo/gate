@@ -1,6 +1,6 @@
-#include <core/core.h>
+#include "core/core.h"
 
-#include <event/event_data.h>
+#include "event/event_data.h"
 
 int core_run(struct Event *event) {
   int running = 1;

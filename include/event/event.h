@@ -29,7 +29,7 @@ struct Event {
 };
 
 /**
- * \brief Builds an event instance passed by argument. Event behaves
+ * \brief Initializes an event instance passed by argument. Event behaves
  * level-triggered (LT).
  *
  * Creates a new epoll instance and a listener socket.
@@ -44,7 +44,7 @@ struct Event {
  * @param port Port to listen
  * @return Return 0 on sucess otherwise return -1.
  */
-int event_build(struct Event *event, const char *port);
+int event_init(struct Event *event, const char *port);
 
 /**
  * \brief Waits for I/O events.

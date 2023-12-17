@@ -7,7 +7,7 @@ extern "C" {
 TEST(vector, build_vector) {
   struct Vec vec;
 
-  vec_build(&vec);
+  vec_init(&vec);
 
   ASSERT_EQ(vec.size, 0);
   ASSERT_EQ(vec.capacity, 0);
@@ -19,7 +19,7 @@ TEST(vector, build_vector) {
 TEST(vector, clear_vector) {
   struct Vec vec;
 
-  vec_build(&vec);
+  vec_init(&vec);
   vec_free(&vec);
 
   ASSERT_EQ(vec.capacity, 0);
@@ -30,7 +30,7 @@ TEST(vector, vector_push_one_element) {
   struct Vec vec;
   char elt = 'g';
 
-  vec_build(&vec);
+  vec_init(&vec);
   ASSERT_EQ(vec_push(&vec, elt), 0);
 
   ASSERT_EQ(vec.size, 1);
@@ -51,7 +51,7 @@ TEST(vector, vector_fill_capacity) {
     char elt_7 = 't';
     char elt_8 = 'e';
 
-    vec_build(&vec);
+    vec_init(&vec);
 
   ASSERT_EQ(vec_push(&vec, elt_1), 0);
     ASSERT_EQ(vec_push(&vec, elt_2), 0);
@@ -88,7 +88,7 @@ TEST(vector, vector_fill_to_grow) {
   char elt_8 = 'e';
   char elt_9 = 'p';
 
-  vec_build(&vec);
+  vec_init(&vec);
 
   ASSERT_EQ(vec_push(&vec, elt_1), 0);
   ASSERT_EQ(vec_push(&vec, elt_2), 0);
@@ -119,7 +119,7 @@ TEST(vector, vector_push_str_to_fill_no_grow) {
   struct Vec vec;
   char expected[] = "Password";
 
-  vec_build(&vec);
+  vec_init(&vec);
   ASSERT_EQ(vec_push_str(&vec, expected, strlen(expected)), 0);
 
   ASSERT_EQ(vec.size, 8);
@@ -133,7 +133,7 @@ TEST(vector, vector_push_str_to_grow) {
   struct Vec vec;
   char expected[] = "Technique";
 
-  vec_build(&vec);
+  vec_init(&vec);
   ASSERT_EQ(vec_push_str(&vec, expected, strlen(expected)), 0);
 
   ASSERT_EQ(vec.size, strlen(expected));
@@ -147,7 +147,7 @@ TEST(vector, vector_push_long_str) {
   struct Vec vec;
   char expected[] = "enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra orci sagittis eu volutpat odio facilisis mauris sit amet massa vitae tortor condimentum lacinia quis vel eros donec ac odio tempor orci dapibus ultrices in iaculis nunc sed augue lacus viverra vitae congue eu consequat ac felis donec et odio pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur vitae nunc sed velit dignissim sodales ut eu sem integer vitae justo eget magna fermentum iaculis eu non diam phasellus vestibulum lorem sed risus ultricies";
 
-  vec_build(&vec);
+  vec_init(&vec);
   ASSERT_EQ(vec_push_str(&vec, expected, strlen(expected)), 0);
 
   ASSERT_EQ(vec.size, strlen(expected));

@@ -7,7 +7,7 @@
 #include <errno.h>
 #include <string.h>
 
-int event_build(struct Event *event, const char *port) {
+int event_init(struct Event *event, const char *port) {
   struct epoll_event listener_ev;
 
   if ((event->epfd = epoll_create1(0)) == -1) {

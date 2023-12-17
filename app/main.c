@@ -8,7 +8,7 @@ int main(void) {
   int rv;
   struct Event event;
 
-  rv = event_build(&event, PORT);
+  rv = event_init(&event, PORT);
   log_info("listening on http://localhost:%s", PORT);
 
   if (rv == -1) {

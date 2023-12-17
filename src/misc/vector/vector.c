@@ -8,7 +8,7 @@
 static int vec_grow(struct Vec *vec, size_t *capacity);
 static int vec_allocate(struct Vec *vec, size_t size);
 
-void vec_build(struct Vec *vec) {
+void vec_init(struct Vec *vec) {
   vec->size = 0;
   vec->capacity = 0;
   vec->data = NULL;
@@ -18,6 +18,7 @@ void vec_free(struct Vec *vec) {
   vec->capacity = 0;
   vec->size = 0;
   free(vec->data);
+  vec->data = NULL;
 }
 
 int vec_push(struct Vec *vec, char elt) {

@@ -25,7 +25,7 @@ struct EventData *eventdata_build(int fd) {
   }
 
   event_data->fd = fd;
-  vec_build(&event_data->data);
+  vec_init(&event_data->data);
 
   return event_data;
 }

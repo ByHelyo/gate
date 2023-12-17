@@ -10,11 +10,11 @@ struct Vec {
 };
 
 /**
- * \brief Builds a vector.
+ * \brief Initializes a vector.
  *
  * @param vec The vector.
  */
-void vec_build(struct Vec *vec);
+void vec_init(struct Vec *vec);
 
 /**
  * \brief Appends a character to the back of a collection.

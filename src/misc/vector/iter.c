@@ -2,36 +2,36 @@
 
 #include "misc/vector/vector.h"
 
-struct IterResult iter_result_build(void) {
+struct IterResult iterResult_build(void) {
   struct IterResult ret;
   ret.ch = '\0';
-  ret.status = IterErr;
+  ret.status = IterNone;
 
   return ret;
 }
 
-void iter_vec_build(struct IterVec *iter_vec, struct Vec *vec) {
-  iter_vec->vec = vec;
-  iter_vec->idx = 0;
+void iterVec_init(struct IterVec *iterVec, struct Vec *vec) {
+  iterVec->vec = vec;
+  iterVec->idx = 0;
 }
 
-struct IterResult iter_vec_peek(struct IterVec *iter_vec) {
-  struct IterResult ret = iter_result_build();
+struct IterResult iterVec_peek(struct IterVec *iterVec) {
+  struct IterResult ret = iterResult_build();
 
-  if (iter_vec->idx < iter_vec->vec->size) {
-    ret.status = IterOk;
-    ret.ch = iter_vec->vec->data[iter_vec->idx];
+  if (iterVec->idx < iterVec->vec->size) {
+    ret.status = IterSome;
+    ret.ch = iterVec->vec->data[iterVec->idx];
   }
 
   return ret;
 }
 
-struct IterResult iter_vec_next(struct IterVec *iter_vec) {
-  struct IterResult ret = iter_result_build();
+struct IterResult iterVec_next(struct IterVec *iterVec) {
+  struct IterResult ret = iterResult_build();
 
-  if (iter_vec->idx < iter_vec->vec->size) {
-    ++iter_vec->idx;
-    ret.status = IterOk;
+  if (iterVec->idx < iterVec->vec->size) {
+    ++iterVec->idx;
+    ret.status = IterSome;
   }
 
   return ret;

@@ -10,6 +10,7 @@ add_library(request
 
 target_link_libraries(request PRIVATE
         vector
+        trie
 )
 
 target_include_directories(request PUBLIC ${gate_SOURCE_DIR}/include)

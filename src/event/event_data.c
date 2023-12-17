@@ -44,7 +44,7 @@ int eventdata_destroy(struct EventData *event_data) {
 
 int eventdata_parse(struct EventData *event_data) {
   struct IterVec iter_vec;
-  iter_vec_build(&iter_vec, &event_data->data);
+  iterVec_init(&iter_vec, &event_data->data);
 
   request_parse(&iter_vec);
 

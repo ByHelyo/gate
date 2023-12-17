@@ -6,4 +6,8 @@ add_library(trie
         ${HEADER_LIST}
 )
 
+target_link_libraries(trie PRIVATE
+        vector
+)
+
 target_include_directories(trie PUBLIC ${gate_SOURCE_DIR}/include)

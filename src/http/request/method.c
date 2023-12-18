@@ -1,20 +1,27 @@
 #include "http/request/method.h"
-#include <stdio.h>
 
 #include "misc/trie/trie.h"
 #include "misc/vector/iter.h"
 
-enum ParseResult method_parse(struct IterVec *http) {
-  struct IterResult ret = iterVec_peek(http);
-  if (ret.status == IterNone) {
+void methods_trieInit(struct TrieNode *trieNode) {
+  trieNode_init(trieNode);
+  trieNode_insert(trieNode, "GET", GET);
+  trieNode_insert(trieNode, "HEAD", HEAD);
+  trieNode_insert(trieNode, "POST", POST);
+  trieNode_insert(trieNode, "PUT", PUT);
+  trieNode_insert(trieNode, "DELETE", DELETE);
+  trieNode_insert(trieNode, "CONNECT", CONNECT);
+  trieNode_insert(trieNode, "OPTIONS", OPTIONS);
+  trieNode_insert(trieNode, "TRACE", TRACE);
+  trieNode_insert(trieNode, "PATCH", PATCH);
+}
+
+enum ParseResult method_parse(struct IterVec *http, struct TrieNode *methods) {
+  struct TrieResult trieResult = trieNode_searchIter(methods, http);
+
+  if (trieResult.trieStatus == TrieNone) {
     return ParseErr;
   }
-
-  struct TrieNode trieNode;
-  trieNode_init(&trieNode);
-  trieNode_insert(&trieNode, "HELLO", NULL);
-  printf("%i\n", trieNode_searchIter(&trieNode, http).trieStatus);
-  printf("%i\n", trieNode_searchIter(&trieNode, http).trieStatus);
 
   return ParseOk;
 }

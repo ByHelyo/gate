@@ -42,11 +42,11 @@ int eventdata_destroy(struct EventData *event_data) {
   return rv;
 }
 
-int eventdata_parse(struct EventData *event_data) {
+int eventdata_parse(struct EventData *event_data, struct TrieNode *methods) {
   struct IterVec iter_vec;
   iterVec_init(&iter_vec, &event_data->data);
 
-  request_parse(&iter_vec);
+  request_parse(&iter_vec, methods);
 
   return 0;
 }

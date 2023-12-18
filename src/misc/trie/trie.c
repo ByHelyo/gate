@@ -10,7 +10,7 @@
 
 struct TrieResult trieResult_build(void) {
   struct TrieResult trieResult;
-  trieResult.val = NULL;
+  trieResult.value = 255;
   trieResult.trieStatus = TrieNone;
   return trieResult;
 }
@@ -20,7 +20,7 @@ void trieNode_init(struct TrieNode *trieNode) {
     trieNode->children[i] = NULL;
   }
   trieNode->is_end = 0;
-  trieNode->val = NULL;
+  trieNode->value = 255;
 }
 
 struct TrieNode *trieNode_build(void) {
@@ -35,21 +35,21 @@ struct TrieNode *trieNode_build(void) {
   return trieNode;
 }
 
-void trieNode_insert(struct TrieNode *root, const char *word, void *value) {
+void trieNode_insert(struct TrieNode *root, const char *word, int value) {
   struct TrieNode *cur = root;
 
   for (size_t i = 0; word[i] != '\0'; ++i) {
     int letter_idx = word[i] - 'A';
 
     if (cur->children[letter_idx] == NULL) {
-      cur->children[letter_idx] = trieNode_build();
+      cur->children[letter_idx] = trieNode_build(); // TODO : build error
     }
 
     cur = cur->children[letter_idx];
   }
 
   cur->is_end = 1;
-  cur->val = value;
+  cur->value = value;
 }
 
 struct TrieResult trieNode_searchIter(struct TrieNode *root,
@@ -81,7 +81,7 @@ struct TrieResult trieNode_searchIter(struct TrieNode *root,
     return trieResult;
   }
 
-  trieResult.val = cur->val;
+  trieResult.value = cur->value;
   trieResult.trieStatus = TrieSome;
   return trieResult;
 }

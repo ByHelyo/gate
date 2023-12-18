@@ -3,6 +3,8 @@
 
 #include "misc/vector/vector.h"
 
+struct TrieNode;
+
 /**
  * Structure used to store data for an event.
  */
@@ -29,12 +31,17 @@ int eventdata_destroy(struct EventData *event_data);
 
 /**
  * \brief Checks if the provided event data contains necessary information for
- * constructing an HTTP request.
+ * constructing an HTTP request using specified methods.
+ *
+ * This function examines the event data to determine if it contains the
+ * required data for building an HTTP request based on the specified methods
+ * stored in a TrieNode.
  *
  * @param event_data The event data containing data for the HTTP request.
+ * @param methods Pointer to the TrieNode storing allowed HTTP methods.
  * @return Returns 1 if the HTTP request can be constructed using the given
- * event data, otherwise returns 0.
+ * event data and allowed methods, otherwise returns 0.
  */
-int eventdata_parse(struct EventData *event_data);
+int eventdata_parse(struct EventData *event_data, struct TrieNode *methods);
 
 #endif // GATE_EVENT_DATA_H

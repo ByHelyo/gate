@@ -8,11 +8,19 @@
 #include <stdlib.h>
 #include <string.h>
 
+struct TrieResult trieResult_build(void) {
+  struct TrieResult trieResult;
+  trieResult.val = NULL;
+  trieResult.trieStatus = TrieNone;
+  return trieResult;
+}
+
 void trieNode_init(struct TrieNode *trieNode) {
   for (size_t i = 0; i < CHAR_SIZE; ++i) {
     trieNode->children[i] = NULL;
   }
   trieNode->is_end = 0;
+  trieNode->val = NULL;
 }
 
 struct TrieNode *trieNode_build(void) {
@@ -27,7 +35,7 @@ struct TrieNode *trieNode_build(void) {
   return trieNode;
 }
 
-void trieNode_insert(struct TrieNode *root, const char *word) {
+void trieNode_insert(struct TrieNode *root, const char *word, void *value) {
   struct TrieNode *cur = root;
 
   for (size_t i = 0; word[i] != '\0'; ++i) {
@@ -41,17 +49,19 @@ void trieNode_insert(struct TrieNode *root, const char *word) {
   }
 
   cur->is_end = 1;
+  cur->val = value;
 }
 
-enum TrieResult trieNode_searchIter(struct TrieNode *root,
-                                    struct IterVec *iterVec) {
+struct TrieResult trieNode_searchIter(struct TrieNode *root,
+                                      struct IterVec *iterVec) {
   struct TrieNode *cur = root;
+  struct TrieResult trieResult = trieResult_build();
 
   while (1) {
     struct IterResult ret = iterVec_peek(iterVec);
 
     if (ret.status == IterNone) {
-      return TrieNone;
+      break;
     }
 
     if (ret.ch < 'A' || ret.ch > 'Z') {
@@ -60,16 +70,20 @@ enum TrieResult trieNode_searchIter(struct TrieNode *root,
 
     int letter_idx = ret.ch - 'A';
     if (cur->children[letter_idx] == NULL) {
-      return TrieNone;
+      return trieResult;
     }
 
     cur = cur->children[letter_idx];
+    iterVec_next(iterVec);
   }
 
-  if (cur->is_end) {
-    return TrieNone;
+  if (!cur->is_end) {
+    return trieResult;
   }
-  return TrieNone;
+
+  trieResult.val = cur->val;
+  trieResult.trieStatus = TrieSome;
+  return trieResult;
 }
 
 void triNode_free(struct TrieNode *trieNode) {

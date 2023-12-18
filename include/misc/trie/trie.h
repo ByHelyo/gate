@@ -6,22 +6,28 @@
 struct TrieNode;
 struct IterVec;
 
-enum TrieResult {
+enum TrieStatus {
   TrieSome,
   TrieNone,
 };
 
+struct TrieResult {
+  enum TrieStatus trieStatus;
+  void *val;
+};
+
 struct TrieNode {
   int is_end;
+  void *val;
   struct TrieNode *children[CHAR_SIZE];
 };
 
 void trieNode_init(struct TrieNode *trieNode);
 
-void trieNode_insert(struct TrieNode *root, const char *word);
+void trieNode_insert(struct TrieNode *root, const char *word, void *value);
 
-enum TrieResult trieNode_searchIter(struct TrieNode *root,
-                                    struct IterVec *iterVec);
+struct TrieResult trieNode_searchIter(struct TrieNode *root,
+                                      struct IterVec *iterVec);
 
 void triNode_free(struct TrieNode *trieNode);
 

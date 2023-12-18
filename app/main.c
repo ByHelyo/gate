@@ -2,18 +2,19 @@
 #include <logger/log.h>
 #include <stdio.h>
 
-#define PORT "5173"
+#define PORT "5174"
 
 int main(void) {
   int rv;
   struct Event event;
 
   rv = event_init(&event, PORT);
-  log_info("listening on http://localhost:%s", PORT);
 
   if (rv == -1) {
     goto end; /* Failure, File descriptors are already closed. */
   }
+
+  log_info("listening on http://localhost:%s", PORT);
 
   rv = core_run(&event);
 

@@ -46,7 +46,5 @@ int eventdata_parse(struct EventData *event_data, struct TrieNode *methods) {
   struct IterVec iter_vec;
   iterVec_init(&iter_vec, &event_data->data);
 
-  request_parse(&iter_vec, methods);
-
-  return 0;
+  return request_parse(&iter_vec, methods) == ParseOk ? 1 : 0;
 }

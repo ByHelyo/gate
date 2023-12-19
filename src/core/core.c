@@ -2,6 +2,7 @@
 
 #include "event/event_data.h"
 #include "http/request/method.h"
+#include "logger/log.h"
 #include "misc/trie/trie.h"
 
 int core_run(struct Event *event) {
@@ -25,7 +26,9 @@ int core_run(struct Event *event) {
         event_accept(event);
       } else {
         rv = event_read(event_data);
-        eventdata_parse(event_data, &methods);
+        if (eventdata_parse(event_data, &methods) == 0) {
+          log_error("Request not parsable: '%s'", event_data->data.data); // TODO : printable
+        }
 
         switch (rv) {
         case 0:

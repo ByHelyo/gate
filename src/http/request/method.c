@@ -3,7 +3,7 @@
 #include "misc/trie/trie.h"
 #include "misc/vector/iter.h"
 
-void methods_trieInit(struct TrieNode *trieNode) {
+void methods_trieInit(struct TrieNode *trieNode) { // TODO : error insert trie
   trieNode_init(trieNode);
 
   trieNode_insert(trieNode, "GET", GET);

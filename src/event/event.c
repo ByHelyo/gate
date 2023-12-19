@@ -138,3 +138,13 @@ int event_read(struct EventData *event_data) {
 int event_close(struct EventData *event_data) {
   return eventdata_destroy(event_data);
 }
+
+int event_size(struct Event *event) { return event->event_ready.size; }
+
+void *event_get(struct Event *event, int index) {
+  return event->event_ready.events[index].data.ptr;
+}
+
+int is_listener(struct Event *event, struct EventData *event_data) {
+  return event->listener == event_data->fd;
+}

@@ -45,6 +45,8 @@ int vec_push_str(struct Vec *vec, char *buf, size_t len) {
   return 0;
 }
 
+char vec_get(struct Vec *vec, size_t index) { return vec->data[index]; }
+
 void vec_print(struct Vec *vec) {
   log_info("vector: %.*s", vec->size, vec->data);
 }

@@ -35,14 +35,17 @@ struct TrieNode *trieNode_build(void) {
   return trieNode;
 }
 
-void trieNode_insert(struct TrieNode *root, const char *word, int value) {
+int trieNode_insert(struct TrieNode *root, const char *word, int value) {
   struct TrieNode *cur = root;
 
   for (size_t i = 0; word[i] != '\0'; ++i) {
     int letter_idx = word[i] - 'A';
 
     if (cur->children[letter_idx] == NULL) {
-      cur->children[letter_idx] = trieNode_build(); // TODO : build error
+      cur->children[letter_idx] = trieNode_build();
+      if (cur->children[letter_idx] == NULL) {
+        return 0;
+      }
     }
 
     cur = cur->children[letter_idx];
@@ -50,6 +53,7 @@ void trieNode_insert(struct TrieNode *root, const char *word, int value) {
 
   cur->is_end = 1;
   cur->value = value;
+  return 1;
 }
 
 struct TrieResult trieNode_searchIter(struct TrieNode *root,

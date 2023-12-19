@@ -4,6 +4,9 @@
 #include "misc/vector/iter.h"
 
 enum ParseResult request_parse(struct IterVec *http, struct TrieNode *methods) {
-  method_parse(http, methods);
+  if (method_parse(http, methods) == ParseErr) {
+    return ParseErr;
+  }
+
   return ParseOk;
 }

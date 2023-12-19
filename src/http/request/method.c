@@ -5,6 +5,7 @@
 
 void methods_trieInit(struct TrieNode *trieNode) {
   trieNode_init(trieNode);
+
   trieNode_insert(trieNode, "GET", GET);
   trieNode_insert(trieNode, "HEAD", HEAD);
   trieNode_insert(trieNode, "POST", POST);

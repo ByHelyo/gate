@@ -37,6 +37,17 @@ int vec_push(struct Vec *vec, char character);
 int vec_push_str(struct Vec *vec, char *buf, size_t len);
 
 /**
+ * @brief Gets a character at the specified index from a Vec.
+ *
+ * Retrieves a character from the provided Vec structure at the specified index.
+ *
+ * @param vec Pointer to the Vec structure.
+ * @param index The index of the character to retrieve.
+ * @return Returns the character at the specified index in the Vec.
+ */
+char vec_get(struct Vec *vec, size_t index);
+
+/**
  * \brief Frees the vector data.
  *
  * @param vec The vector.

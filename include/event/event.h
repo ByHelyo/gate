@@ -94,4 +94,40 @@ int event_read(struct EventData *event_data);
  */
 int event_close(struct EventData *event_data);
 
+/**
+ * @brief Gets the number of events ready.
+ *
+ * This function retrieves the number of events that are currently ready in the
+ * provided Event structure.
+ *
+ * @param event Pointer to the Event structure.
+ * @return Returns the number of events ready.
+ */
+int event_size(struct Event *event);
+
+/**
+ * @brief Gets event data from a specified index.
+ *
+ * This function retrieves event data from the provided Event structure at the
+ * specified index.
+ *
+ * @param event Pointer to the Event structure.
+ * @param index Index of the event data to retrieve.
+ * @return Returns a pointer to the event data at the specified index.
+ */
+void *event_get(struct Event *event, int index);
+
+/**
+ * @brief Checks if the EventData is the listener associated with the Event.
+ *
+ * This function checks whether the provided EventData structure corresponds to
+ * the listener associated with the given Event structure.
+ *
+ * @param event Pointer to the Event structure.
+ * @param event_data Pointer to the EventData structure to be checked.
+ * @return Returns 1 if the EventData is the listener associated with the Event,
+ * otherwise 0.
+ */
+int is_listener(struct Event *event, struct EventData *event_data);
+
 #endif // GATE_EVENT_H

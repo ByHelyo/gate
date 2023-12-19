@@ -20,7 +20,7 @@ struct IterResult iterVec_peek(struct IterVec *iterVec) {
 
   if (iterVec->idx < iterVec->vec->size) {
     ret.status = IterSome;
-    ret.ch = iterVec->vec->data[iterVec->idx]; // TODO : abtract get
+    ret.ch = vec_get(iterVec->vec, iterVec->idx);
   }
 
   return ret;
@@ -30,7 +30,7 @@ struct IterResult iterVec_next(struct IterVec *iterVec) {
   struct IterResult ret = iterResult_build();
 
   if (iterVec->idx < iterVec->vec->size) {
-    ret.ch = iterVec->vec->data[iterVec->idx]; // TODO : abstract get
+    ret.ch = vec_get(iterVec->vec, iterVec->idx);
     ret.status = IterSome;
     ++iterVec->idx;
   }

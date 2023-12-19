@@ -18,13 +18,11 @@ int core_run(struct Event *event) {
       running = 0;
     }
 
-    for (current_ev = 0; current_ev < event->event_ready.size;
-         ++current_ev) { // TODO : method get event size
-      event_data = event->event_ready.events[current_ev]
-                       .data.ptr; // TODO : abstract this
+    for (current_ev = 0; current_ev < event_size(event); ++current_ev) {
+      event_data = event_get(event, current_ev);
 
-      if (event_data->fd == event->listener) { // TODO : Abstract this
-        event_accept(event);                   // TODO : Error
+      if (is_listener(event, event_data)) {
+        event_accept(event);
       } else {
         rv = event_read(event_data);
         eventdata_parse(event_data, &methods);

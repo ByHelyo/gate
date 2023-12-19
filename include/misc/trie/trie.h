@@ -40,9 +40,9 @@ void trieNode_init(struct TrieNode *trieNode);
  * @param root Pointer to the root TrieNode of the structure.
  * @param word The word to be inserted into the Trie.
  * @param value The value associated with the word to be stored.
+ * @return Returns 1 on successful insertion, otherwise returns 0 on error.
  */
-void trieNode_insert(struct TrieNode *root, const char *word, int value);
-
+int trieNode_insert(struct TrieNode *root, const char *word, int value);
 /**
  * \brief Searches for a word in the TrieNode structure using an iterator.
  *

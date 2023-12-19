@@ -2,7 +2,7 @@
 #include <logger/log.h>
 #include <stdio.h>
 
-#define PORT "5174"
+#define PORT "5173"
 
 int main(void) {
   int rv;

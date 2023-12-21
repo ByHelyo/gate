@@ -1,9 +1,10 @@
-#include "core/core.h"
+#include <core/core.h>
 
-#include "event/event_data.h"
-#include "http/request/method.h"
-#include "logger/log.h"
-#include "misc/trie/trie.h"
+#include <event/event.h>
+#include <event/event_data.h>
+#include <http/request/method.h>
+#include <logger/log.h>
+#include <misc/trie/trie.h>
 
 int core_run(struct Event *event) {
   int running = 1;
@@ -27,7 +28,8 @@ int core_run(struct Event *event) {
       } else {
         rv = event_read(event_data);
         if (eventdata_parse(event_data, &methods) == 0) {
-          log_error("Request not parsable: '%s'", event_data->data.data); // TODO : printable
+          log_error("Request not parsable: '%s'",
+                    event_data->data.data); // TODO : printable
         }
 
         switch (rv) {

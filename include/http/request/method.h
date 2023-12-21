@@ -3,8 +3,6 @@
 
 #include <http/request/request.h>
 
-struct TrieNode;
-
 enum Method {
   GET,
   HEAD,

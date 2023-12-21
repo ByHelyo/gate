@@ -2,12 +2,19 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/request.h"
         "${gate_SOURCE_DIR}/include/http/request/method.h"
         "${gate_SOURCE_DIR}/include/http/request/misc.h"
+        "${gate_SOURCE_DIR}/include/http/request/origin_form.h"
+        "${gate_SOURCE_DIR}/include/http/request/segment.h"
+        "${gate_SOURCE_DIR}/include/http/request/absolute_path.h"
 )
 
 add_library(request
         request.c
         method.c
         misc.c
+        request_target.c
+        origin_form.c
+        segment.c
+        absolute_path.c
         ${HEADER_LIST})
 
 target_link_libraries(request PRIVATE

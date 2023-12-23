@@ -34,7 +34,7 @@ int vec_push(struct Vec *vec, char elt) {
   return 0;
 }
 
-int vec_push_str(struct Vec *vec, char *buf, size_t len) {
+int vec_push_str(struct Vec *vec, const char *buf, size_t len) {
   if (vec_grow(vec, &len) == -1) {
     return -1;
   }

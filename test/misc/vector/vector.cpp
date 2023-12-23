@@ -1,7 +1,7 @@
 #include <gtest/gtest.h>
 
 extern "C" {
-#include <misc/vector/vector.h>
+#include "misc/vector/vector.h"
 }
 
 TEST(vector, build_vector) {

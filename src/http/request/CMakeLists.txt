@@ -9,6 +9,7 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/unreserved.h"
         "${gate_SOURCE_DIR}/include/http/request/pct_encoded.h"
         "${gate_SOURCE_DIR}/include/http/request/sub_delims.h"
+        "${gate_SOURCE_DIR}/include/http/request/query.h"
 )
 
 add_library(request
@@ -23,6 +24,7 @@ add_library(request
         unreserved.c
         pct_encoded.c
         sub_delims.c
+        query.c
         ${HEADER_LIST})
 
 target_link_libraries(request PRIVATE

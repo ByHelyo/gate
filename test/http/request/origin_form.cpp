@@ -41,3 +41,15 @@ TEST(origin_form, no_query) {
 
   ASSERT_EQ(origin_form_parse(&it), ParseOk);
 }
+
+TEST(origin_form, with_query) {
+  const char *actual = "/where?q=now";
+  struct Vec vec;
+  struct IterVec it;
+
+  vec_init(&vec);
+  vec_push_str(&vec, actual, strlen(actual));
+  iterVec_init(&it, &vec);
+
+  ASSERT_EQ(origin_form_parse(&it), ParseOk);
+}

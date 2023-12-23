@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
 
 extern "C" {
-#include "http/request/absolute_path.h"
+#include "http/request/query.h"
 #include "misc/vector/iter.h"
 #include "misc/vector/vector.h"
 }
 
-TEST(absolute_path, empty) {
+TEST(query, empty) {
   const char *actual = "";
   struct Vec vec;
   struct IterVec it;
@@ -15,10 +15,10 @@ TEST(absolute_path, empty) {
   vec_push_str(&vec, actual, strlen(actual));
   iterVec_init(&it, &vec);
 
-  ASSERT_EQ(absolute_path_parse(&it), ParseErr);
+  ASSERT_EQ(query_parse(&it), ParseOk);
 }
 
-TEST(absolute_path, space) {
+TEST(query, space) {
   const char *actual = " -";
   struct Vec vec;
   struct IterVec it;
@@ -27,11 +27,11 @@ TEST(absolute_path, space) {
   vec_push_str(&vec, actual, strlen(actual));
   iterVec_init(&it, &vec);
 
-  ASSERT_EQ(absolute_path_parse(&it), ParseErr);
+  ASSERT_EQ(query_parse(&it), ParseOk);
 }
 
-TEST(absolute_path, invalid) {
-  const char *actual = "-";
+TEST(query, invalid) {
+  const char *actual = "]-";
   struct Vec vec;
   struct IterVec it;
 
@@ -39,11 +39,11 @@ TEST(absolute_path, invalid) {
   vec_push_str(&vec, actual, strlen(actual));
   iterVec_init(&it, &vec);
 
-  ASSERT_EQ(absolute_path_parse(&it), ParseErr);
+  ASSERT_EQ(query_parse(&it), ParseOk);
 }
 
-TEST(absolute_path, simple_valid) {
-  const char *actual = "/C -";
+TEST(query, just_slash) {
+  const char *actual = "/-";
   struct Vec vec;
   struct IterVec it;
 
@@ -51,11 +51,11 @@ TEST(absolute_path, simple_valid) {
   vec_push_str(&vec, actual, strlen(actual));
   iterVec_init(&it, &vec);
 
-  ASSERT_EQ(absolute_path_parse(&it), ParseOk);
+  ASSERT_EQ(query_parse(&it), ParseOk);
 }
 
-TEST(absolute_path, slash) {
-  const char *actual = "/ -";
+TEST(query, just_question_mark) {
+  const char *actual = "?-";
   struct Vec vec;
   struct IterVec it;
 
@@ -63,11 +63,11 @@ TEST(absolute_path, slash) {
   vec_push_str(&vec, actual, strlen(actual));
   iterVec_init(&it, &vec);
 
-  ASSERT_EQ(absolute_path_parse(&it), ParseOk);
+  ASSERT_EQ(query_parse(&it), ParseOk);
 }
 
-TEST(absolute_path, double_slash) {
-  const char *actual = "// -";
+TEST(query, long_valid) {
+  const char *actual = "//?//??%3F,,,))(((&&$$$==%AA-";
   struct Vec vec;
   struct IterVec it;
 
@@ -75,11 +75,11 @@ TEST(absolute_path, double_slash) {
   vec_push_str(&vec, actual, strlen(actual));
   iterVec_init(&it, &vec);
 
-  ASSERT_EQ(absolute_path_parse(&it), ParseOk);
+  ASSERT_EQ(query_parse(&it), ParseOk);
 }
 
-TEST(absolute_path, valid) {
-  const char *actual = "/('%1A'Helloworld!') -";
+TEST(query, wrong_pct_encoded) {
+  const char *actual = "//?//??%3,,,))(((&&$$$==%AA-";
   struct Vec vec;
   struct IterVec it;
 
@@ -87,17 +87,5 @@ TEST(absolute_path, valid) {
   vec_push_str(&vec, actual, strlen(actual));
   iterVec_init(&it, &vec);
 
-  ASSERT_EQ(absolute_path_parse(&it), ParseOk);
-}
-
-TEST(absolute_path, long_valid) {
-  const char *actual = "/('%1A'Helloworld!')/%AA/,,,%DA -";
-  struct Vec vec;
-  struct IterVec it;
-
-  vec_init(&vec);
-  vec_push_str(&vec, actual, strlen(actual));
-  iterVec_init(&it, &vec);
-
-  ASSERT_EQ(absolute_path_parse(&it), ParseOk);
+  ASSERT_EQ(query_parse(&it), ParseErr);
 }

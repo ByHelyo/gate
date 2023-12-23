@@ -1,6 +1,7 @@
 #include "http/request/absolute_path.h"
 
 #include "http/request/origin_form.h"
+#include "http/request/query.h"
 #include "misc/vector/iter.h"
 
 enum ParseResult origin_form_parse(struct IterVec *http) {
@@ -15,6 +16,10 @@ enum ParseResult origin_form_parse(struct IterVec *http) {
   }
 
   if (ret.ch != '?') {
+    return ParseErr;
+  }
+
+  if (query_parse(http) == ParseErr) {
     return ParseErr;
   }
 

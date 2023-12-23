@@ -42,6 +42,18 @@ TEST(segment, valid) {
   ASSERT_EQ(segment_parse(&it), ParseOk);
 }
 
+TEST(segment, nothing) {
+  const char *actual = "] -";
+  struct Vec vec;
+  struct IterVec it;
+
+  vec_init(&vec);
+  vec_push_str(&vec, actual, strlen(actual));
+  iterVec_init(&it, &vec);
+
+  ASSERT_EQ(segment_parse(&it), ParseOk);
+}
+
 TEST(segment, long_segment) {
   const char *actual = "%33,helloworld!(%FA%3F)) -";
   struct Vec vec;

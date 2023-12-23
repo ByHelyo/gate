@@ -17,7 +17,9 @@ enum ParseResult absolute_path_parse(struct IterVec *http) {
       return ParseErr;
     }
 
-    segment_parse(http);
+    if (segment_parse(http) == ParseErr) {
+      return ParseErr;
+    }
 
     ++count;
   }

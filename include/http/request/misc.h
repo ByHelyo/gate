@@ -9,4 +9,6 @@ int is_alpha(char ch);
 
 int is_digit(char ch);
 
+int is_hexdig(char ch);
+
 #endif // GATE_MISC_H

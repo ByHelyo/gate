@@ -3,18 +3,20 @@
 #include "http/request/pchar.h"
 #include "misc/vector/iter.h"
 
-void segment_parse(struct IterVec *http) {
+enum ParseResult segment_parse(struct IterVec *http) {
   while (1) {
     struct IterResult ret = iterVec_peek(http);
 
     if (ret.status == IterNone) {
-      return;
+      return ParseOk;
     }
 
     if (!is_pchar(ret.ch)) {
-      return;
+      return ParseOk;
     }
 
-    iterVec_next(http);
+    if (pchar_parse(http) == ParseErr) {
+      return ParseErr;
+    }
   }
 }

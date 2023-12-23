@@ -5,6 +5,8 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/origin_form.h"
         "${gate_SOURCE_DIR}/include/http/request/segment.h"
         "${gate_SOURCE_DIR}/include/http/request/absolute_path.h"
+        "${gate_SOURCE_DIR}/include/http/request/pchar.h"
+        "${gate_SOURCE_DIR}/include/http/request/unreserved.h"
 )
 
 add_library(request
@@ -15,6 +17,8 @@ add_library(request
         origin_form.c
         segment.c
         absolute_path.c
+        pchar.c
+        unreserved.c
         ${HEADER_LIST})
 
 target_link_libraries(request PRIVATE

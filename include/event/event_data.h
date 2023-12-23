@@ -1,7 +1,7 @@
 #ifndef GATE_EVENT_DATA_H
 #define GATE_EVENT_DATA_H
 
-#include <misc/vector/vector.h>
+#include "misc/vector/vector.h"
 
 struct TrieNode;
 

@@ -1,10 +1,10 @@
-#include <core/core.h>
+#include "core/core.h"
 
-#include <event/event.h>
-#include <event/event_data.h>
-#include <http/request/method.h>
-#include <logger/log.h>
-#include <misc/trie/trie.h>
+#include "event/event.h"
+#include "event/event_data.h"
+#include "http/request/method.h"
+#include "logger/log.h"
+#include "misc/trie/trie.h"
 
 int core_run(struct Event *event) {
   int running = 1;

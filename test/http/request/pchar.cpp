@@ -2,8 +2,8 @@
 
 extern "C" {
 #include "http/request/pchar.h"
-#include "misc/vector/vector.h"
 #include "misc/vector/iter.h"
+#include "misc/vector/vector.h"
 }
 
 TEST(pchar, empty) {

@@ -7,16 +7,13 @@ enum ParseResult absolute_path_parse(struct IterVec *http) {
   unsigned int count = 0;
 
   while (1) {
-    struct IterResult ret = iterVec_next(http);
+    struct IterResult ret = iterVec_peek(http);
 
-    if (ret.status == IterNone) {
+    if (ret.status == IterNone || ret.ch != '/') {
       break;
     }
 
-    if (ret.ch != '/') {
-      return ParseErr;
-    }
-
+    iterVec_next(http);
     if (segment_parse(http) == ParseErr) {
       return ParseErr;
     }
@@ -24,5 +21,5 @@ enum ParseResult absolute_path_parse(struct IterVec *http) {
     ++count;
   }
 
-  return count > 1 ? ParseOk : ParseErr;
+  return count >= 1 ? ParseOk : ParseErr;
 }

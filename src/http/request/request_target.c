@@ -17,5 +17,5 @@ enum ParseResult request_target_parse(struct IterVec *http) {
     }
   }
 
-  return ParseOk;
+  return ParseErr;
 }

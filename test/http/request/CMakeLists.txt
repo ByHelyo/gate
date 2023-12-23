@@ -4,6 +4,8 @@ add_executable(test_request
         sub_delims.cpp
         pchar.cpp
         segment.cpp
+        absolute_path.cpp
+        origin_form.cpp
 )
 
 target_link_libraries(test_request PRIVATE

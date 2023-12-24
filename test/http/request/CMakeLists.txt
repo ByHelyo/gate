@@ -7,6 +7,7 @@ add_executable(test_request
         absolute_path.cpp
         origin_form.cpp
         query_parse.cpp
+        scheme.cpp
 )
 
 target_link_libraries(test_request PRIVATE

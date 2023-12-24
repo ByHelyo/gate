@@ -9,6 +9,7 @@ enum ParseResult scheme_parse(struct IterVec *http) {
     return ParseErr;
   }
 
+  iterVec_next(http);
   while (1) {
     ret = iterVec_peek(http);
 

@@ -9,12 +9,12 @@ enum ParseResult request_target_parse(struct IterVec *http) {
 
   struct IterResult ret = iterVec_peek(http);
 
-  if (ret.status == IterNone) {
+  if (!ret.status) {
     return ParseErr;
   }
 
   if (ret.ch == '/') {
-    if (origin_form_parse(http) == ParseErr) {
+    if (!origin_form_parse(http)) {
       return ParseErr;
     }
   } else if (is_alpha(ret.ch)) {

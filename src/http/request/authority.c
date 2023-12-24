@@ -10,7 +10,7 @@ enum ParseResult authority_parse(struct IterVec *http) {
 
   if (is_unreserved(ret.ch) || is_pct_encoded(ret.ch) ||
       is_sub_delims(ret.ch) || ret.ch == ':') {
-    if (userinfo_parse(http) == ParseErr) {
+    if (!userinfo_parse(http)) {
       return ParseErr;
     }
   }

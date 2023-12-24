@@ -11,12 +11,12 @@ enum ParseResult origin_form_parse(struct IterVec *http) {
 
   struct IterResult ret = iterVec_peek(http);
 
-  if (ret.status == IterNone || ret.ch != '?') {
+  if (!ret.status || ret.ch != '?') {
     return ParseOk;
   }
 
   iterVec_next(http);
-  if (query_parse(http) == ParseErr) {
+  if (!query_parse(http)) {
     return ParseErr;
   }
 

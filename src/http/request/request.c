@@ -6,15 +6,15 @@
 #include "misc/vector/iter.h"
 
 enum ParseResult request_parse(struct IterVec *http, struct TrieNode *methods) {
-  if (method_parse(http, methods) == ParseErr) {
+  if (!method_parse(http, methods)) {
     return ParseErr;
   }
 
-  if (sp_parse(http) == ParseErr) {
+  if (!sp_parse(http)) {
     return ParseErr;
   }
 
-  if (request_target_parse(http) == ParseErr) {
+  if (!request_target_parse(http)) {
     return ParseErr;
   }
 

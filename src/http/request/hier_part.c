@@ -5,7 +5,7 @@
 enum ParseResult hier_part_parse(struct IterVec *http) {
   struct IterResult ret = iterVec_peek(http);
 
-  if (ret.status == IterNone) {
+  if (!ret.status) {
     return ParseOk;
   }
 
@@ -13,7 +13,7 @@ enum ParseResult hier_part_parse(struct IterVec *http) {
     iterVec_next(http);
     ret = iterVec_next(http);
 
-    if (ret.status == IterNone) {
+    if (!ret.status) {
       return ParseErr;
     }
 

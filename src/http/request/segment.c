@@ -7,11 +7,11 @@ enum ParseResult segment_parse(struct IterVec *http) {
   while (1) {
     struct IterResult ret = iterVec_peek(http);
 
-    if (ret.status == IterNone || !is_pchar(ret.ch)) {
+    if (!ret.status || !is_pchar(ret.ch)) {
       return ParseOk;
     }
 
-    if (pchar_parse(http) == ParseErr) {
+    if (!pchar_parse(http)) {
       return ParseErr;
     }
   }

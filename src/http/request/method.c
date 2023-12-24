@@ -20,7 +20,7 @@ void methods_trieInit(struct TrieNode *trieNode) { // TODO : error insert trie
 enum ParseResult method_parse(struct IterVec *http, struct TrieNode *methods) {
   struct TrieResult trieResult = trieNode_searchIter(methods, http);
 
-  if (trieResult.trieStatus == TrieNone) {
+  if (!trieResult.trieStatus) {
     return ParseErr;
   }
 

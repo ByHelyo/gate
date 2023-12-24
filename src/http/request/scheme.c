@@ -5,7 +5,7 @@
 enum ParseResult scheme_parse(struct IterVec *http) {
   struct IterResult ret = iterVec_next(http);
 
-  if (ret.status == IterNone || !is_alpha(ret.ch)) {
+  if (!ret.status || !is_alpha(ret.ch)) {
     return ParseErr;
   }
 
@@ -13,7 +13,7 @@ enum ParseResult scheme_parse(struct IterVec *http) {
   while (1) {
     ret = iterVec_peek(http);
 
-    if (ret.status == IterNone) {
+    if (!ret.status) {
       return ParseOk;
     }
 

@@ -12,7 +12,7 @@ int is_pchar(char ch) {
 enum ParseResult pchar_parse(struct IterVec *http) {
   struct IterResult ret = iterVec_peek(http);
 
-  if (ret.status == IterNone) {
+  if (!ret.status) {
     return ParseErr;
   }
 

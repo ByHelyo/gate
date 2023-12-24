@@ -8,16 +8,16 @@ enum ParseResult userinfo_parse(struct IterVec *http) {
   while (1) {
     struct IterResult ret = iterVec_peek(http);
 
-    if (ret.status == IterNone) {
+    if (!ret.status) {
       return ParseOk;
     }
 
     if (is_unreserved(ret.ch)) {
-      if (unreserved_parse(http) == ParseErr) {
+      if (!unreserved_parse(http)) {
         return ParseErr;
 
       } else if (is_pct_encoded(ret.ch)) {
-        if (pct_encoded_parse(http) == ParseErr) {
+        if (!pct_encoded_parse(http)) {
           return ParseErr;
         }
 

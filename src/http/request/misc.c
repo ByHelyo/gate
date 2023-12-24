@@ -5,7 +5,7 @@
 enum ParseResult sp_parse(struct IterVec *http) {
   struct IterResult ret = iterVec_next(http);
 
-  if (ret.status == IterNone) {
+  if (!ret.status) {
     return ParseErr;
   }
 

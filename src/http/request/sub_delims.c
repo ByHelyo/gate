@@ -10,7 +10,7 @@ int is_sub_delims(char ch) {
 enum ParseResult sub_delims_parse(struct IterVec *http) {
   struct IterResult ret = iterVec_next(http);
 
-  if (ret.status == IterNone || !is_sub_delims(ret.ch)) {
+  if (!ret.status || !is_sub_delims(ret.ch)) {
     return ParseErr;
   }
 

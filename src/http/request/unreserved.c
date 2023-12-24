@@ -11,7 +11,7 @@ int is_unreserved(char ch) {
 enum ParseResult unreserved_parse(struct IterVec *http) {
   struct IterResult ret = iterVec_next(http);
 
-  if (ret.status == IterNone || !is_unreserved(ret.ch)) {
+  if (!ret.status || !is_unreserved(ret.ch)) {
     return ParseErr;
   }
 

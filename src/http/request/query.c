@@ -6,12 +6,12 @@ enum ParseResult query_parse(struct IterVec *http) {
   while (1) {
     struct IterResult ret = iterVec_peek(http);
 
-    if (ret.status == IterNone || ret.ch == ' ') {
+    if (!ret.status || ret.ch == ' ') {
       return ParseOk;
     }
 
     if (is_pchar(ret.ch)) {
-      if (pchar_parse(http) == ParseErr) {
+      if (!pchar_parse(http)) {
         return ParseErr;
       }
     } else if (ret.ch == '/') {

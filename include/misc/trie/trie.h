@@ -7,8 +7,8 @@ struct TrieNode;
 struct IterVec;
 
 enum TrieStatus {
-  TrieSome,
   TrieNone,
+  TrieSome,
 };
 
 struct TrieResult {

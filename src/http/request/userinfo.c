@@ -15,20 +15,19 @@ enum ParseResult userinfo_parse(struct IterVec *http) {
     if (is_unreserved(ret.ch)) {
       if (!unreserved_parse(http)) {
         return ParseErr;
-
-      } else if (is_pct_encoded(ret.ch)) {
-        if (!pct_encoded_parse(http)) {
-          return ParseErr;
-        }
-
-      } else if (is_sub_delims(ret.ch)) {
-        if (sub_delims_parse(http)) {
-          return ParseErr;
-        }
-
-      } else {
-        return ParseOk;
       }
+    } else if (is_pct_encoded(ret.ch)) {
+      if (!pct_encoded_parse(http)) {
+        return ParseErr;
+      }
+    } else if (is_sub_delims(ret.ch)) {
+      if (!sub_delims_parse(http)) {
+        return ParseErr;
+      }
+    } else if (ret.ch == ':') {
+      iterVec_next(http);
+    } else {
+      return ParseOk;
     }
   }
 }

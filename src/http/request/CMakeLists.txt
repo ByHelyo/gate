@@ -13,6 +13,9 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/absolute_form.h"
         "${gate_SOURCE_DIR}/include/http/request/absolute_uri.h"
         "${gate_SOURCE_DIR}/include/http/request/scheme.h"
+        "${gate_SOURCE_DIR}/include/http/request/hier_part.h"
+        "${gate_SOURCE_DIR}/include/http/request/authority.h"
+        "${gate_SOURCE_DIR}/include/http/request/userinfo.h"
 )
 
 add_library(request
@@ -31,6 +34,9 @@ add_library(request
         absolute_form.c
         absolute_uri.c
         scheme.c
+        hier_part.c
+        authority.c
+        userinfo.c
         ${HEADER_LIST})
 
 target_link_libraries(request PRIVATE

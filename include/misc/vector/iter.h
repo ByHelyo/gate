@@ -11,8 +11,8 @@
  * valid value) and IterNone (indicating no value).
  */
 enum IterStatus {
+  IterNone, // Iterator has no value
   IterSome, // Iterator has a valid value
-  IterNone  // Iterator has no value
 };
 
 /**

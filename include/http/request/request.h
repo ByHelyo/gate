@@ -12,8 +12,8 @@ struct TrieNode;
  * during the parsing of an HTTP request using the request_parse function.
  */
 enum ParseResult {
-  ParseOk,
   ParseErr,
+  ParseOk,
 };
 
 /**

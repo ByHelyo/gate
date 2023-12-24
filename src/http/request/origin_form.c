@@ -5,7 +5,7 @@
 #include "misc/vector/iter.h"
 
 enum ParseResult origin_form_parse(struct IterVec *http) {
-  if (absolute_path_parse(http)) {
+  if (!absolute_path_parse(http)) {
     return ParseErr;
   }
 

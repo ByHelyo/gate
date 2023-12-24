@@ -19,7 +19,7 @@ TEST(segment, empty) {
 }
 
 TEST(segment, space) {
-  const char *actual = " -";
+  const char *actual = " |";
   struct Vec vec;
   struct IterVec it;
 
@@ -31,7 +31,7 @@ TEST(segment, space) {
 }
 
 TEST(segment, valid) {
-  const char *actual = "('%FFF') -";
+  const char *actual = "('%FFF') |";
   struct Vec vec;
   struct IterVec it;
 
@@ -43,7 +43,7 @@ TEST(segment, valid) {
 }
 
 TEST(segment, nothing) {
-  const char *actual = "] -";
+  const char *actual = "] |";
   struct Vec vec;
   struct IterVec it;
 
@@ -55,7 +55,7 @@ TEST(segment, nothing) {
 }
 
 TEST(segment, long_segment) {
-  const char *actual = "%33,helloworld!(%FA%3F)) -";
+  const char *actual = "%33,helloworld!(%FA%3F)) |";
   struct Vec vec;
   struct IterVec it;
 
@@ -67,7 +67,7 @@ TEST(segment, long_segment) {
 }
 
 TEST(segment, pct_encoded_unfinished) {
-  const char *actual = "%3 -";
+  const char *actual = "%3 |";
   struct Vec vec;
   struct IterVec it;
 
@@ -79,7 +79,7 @@ TEST(segment, pct_encoded_unfinished) {
 }
 
 TEST(segment, long_segment_pct_unfinished) {
-  const char *actual = "%33,helloworld!(%FG)) -";
+  const char *actual = "%33,helloworld!(%FG)) |";
   struct Vec vec;
   struct IterVec it;
 

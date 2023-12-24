@@ -19,7 +19,7 @@ TEST(unreserved, empty) {
 }
 
 TEST(unreserved, space) {
-  const char *actual = " -";
+  const char *actual = " |";
   struct Vec vec;
   struct IterVec it;
 
@@ -79,7 +79,7 @@ TEST(unreserved, wave) {
 }
 
 TEST(unreserved, alpha_lower) {
-  const char *actual = "c-";
+  const char *actual = "c|";
   struct Vec vec;
   struct IterVec it;
 
@@ -91,7 +91,7 @@ TEST(unreserved, alpha_lower) {
 }
 
 TEST(unreserved, alpha_upper) {
-  const char *actual = "G-";
+  const char *actual = "G|";
   struct Vec vec;
   struct IterVec it;
 
@@ -103,7 +103,7 @@ TEST(unreserved, alpha_upper) {
 }
 
 TEST(unreserved, digit_min) {
-  const char *actual = "0-";
+  const char *actual = "0|";
   struct Vec vec;
   struct IterVec it;
 
@@ -115,7 +115,7 @@ TEST(unreserved, digit_min) {
 }
 
 TEST(unreserved, digit_max) {
-  const char *actual = "9-";
+  const char *actual = "9|";
   struct Vec vec;
   struct IterVec it;
 
@@ -127,7 +127,7 @@ TEST(unreserved, digit_max) {
 }
 
 TEST(unreserved, alpha_upper_min) {
-  const char *actual = "A-";
+  const char *actual = "A|";
   struct Vec vec;
   struct IterVec it;
 
@@ -139,7 +139,7 @@ TEST(unreserved, alpha_upper_min) {
 }
 
 TEST(unreserved, alpha_upper_max) {
-  const char *actual = "Z-";
+  const char *actual = "Z|";
   struct Vec vec;
   struct IterVec it;
 
@@ -151,7 +151,7 @@ TEST(unreserved, alpha_upper_max) {
 }
 
 TEST(unreserved, alpha_lower_min) {
-  const char *actual = "a-";
+  const char *actual = "a|";
   struct Vec vec;
   struct IterVec it;
 
@@ -163,7 +163,7 @@ TEST(unreserved, alpha_lower_min) {
 }
 
 TEST(unreserved, alpha_lower_max) {
-  const char *actual = "z-";
+  const char *actual = "z|";
   struct Vec vec;
   struct IterVec it;
 

@@ -10,6 +10,9 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/pct_encoded.h"
         "${gate_SOURCE_DIR}/include/http/request/sub_delims.h"
         "${gate_SOURCE_DIR}/include/http/request/query.h"
+        "${gate_SOURCE_DIR}/include/http/request/absolute_form.h"
+        "${gate_SOURCE_DIR}/include/http/request/absolute_uri.h"
+        "${gate_SOURCE_DIR}/include/http/request/scheme.h"
 )
 
 add_library(request
@@ -25,6 +28,9 @@ add_library(request
         pct_encoded.c
         sub_delims.c
         query.c
+        absolute_form.c
+        absolute_uri.c
+        scheme.c
         ${HEADER_LIST})
 
 target_link_libraries(request PRIVATE

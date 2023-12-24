@@ -19,7 +19,7 @@ TEST(query, empty) {
 }
 
 TEST(query, space) {
-  const char *actual = " -";
+  const char *actual = " |";
   struct Vec vec;
   struct IterVec it;
 
@@ -31,7 +31,7 @@ TEST(query, space) {
 }
 
 TEST(query, invalid) {
-  const char *actual = "]-";
+  const char *actual = "]|";
   struct Vec vec;
   struct IterVec it;
 
@@ -43,7 +43,7 @@ TEST(query, invalid) {
 }
 
 TEST(query, just_slash) {
-  const char *actual = "/-";
+  const char *actual = "/|";
   struct Vec vec;
   struct IterVec it;
 
@@ -55,7 +55,7 @@ TEST(query, just_slash) {
 }
 
 TEST(query, just_question_mark) {
-  const char *actual = "?-";
+  const char *actual = "?|";
   struct Vec vec;
   struct IterVec it;
 
@@ -67,7 +67,7 @@ TEST(query, just_question_mark) {
 }
 
 TEST(query, long_valid) {
-  const char *actual = "//?//??%3F,,,))(((&&$$$==%AA-";
+  const char *actual = "//?//??%3F,,,))(((&&$$$==%AA|";
   struct Vec vec;
   struct IterVec it;
 
@@ -79,7 +79,7 @@ TEST(query, long_valid) {
 }
 
 TEST(query, wrong_pct_encoded) {
-  const char *actual = "//?//??%3,,,))(((&&$$$==%AA-";
+  const char *actual = "//?//??%3,,,))(((&&$$$==%AA|";
   struct Vec vec;
   struct IterVec it;
 

@@ -19,7 +19,7 @@ TEST(pchar, empty) {
 }
 
 TEST(pchar, space) {
-  const char *actual = " -";
+  const char *actual = " |";
   struct Vec vec;
   struct IterVec it;
 
@@ -31,7 +31,7 @@ TEST(pchar, space) {
 }
 
 TEST(pchar, unreserved) {
-  const char *actual = "3-";
+  const char *actual = "3|";
   struct Vec vec;
   struct IterVec it;
 
@@ -43,7 +43,7 @@ TEST(pchar, unreserved) {
 }
 
 TEST(pchar, pct_encoded) {
-  const char *actual = "%A3-";
+  const char *actual = "%A3|";
   struct Vec vec;
   struct IterVec it;
 
@@ -55,7 +55,7 @@ TEST(pchar, pct_encoded) {
 }
 
 TEST(pchar, sub_delims) {
-  const char *actual = "'-";
+  const char *actual = "'|";
   struct Vec vec;
   struct IterVec it;
 
@@ -67,7 +67,7 @@ TEST(pchar, sub_delims) {
 }
 
 TEST(pchar, square_close_bracket) {
-  const char *actual = "]-";
+  const char *actual = "]|";
   struct Vec vec;
   struct IterVec it;
 

@@ -19,7 +19,7 @@ TEST(pct_encoded, empty) {
 }
 
 TEST(pct_encoded, space) {
-  const char *actual = " -";
+  const char *actual = " |";
   struct Vec vec;
   struct IterVec it;
 
@@ -31,7 +31,7 @@ TEST(pct_encoded, space) {
 }
 
 TEST(pct_encoded, hex) {
-  const char *actual = "%3F-";
+  const char *actual = "%3F|";
   struct Vec vec;
   struct IterVec it;
 
@@ -43,7 +43,7 @@ TEST(pct_encoded, hex) {
 }
 
 TEST(pct_encoded, digit) {
-  const char *actual = "%33-";
+  const char *actual = "%33|";
   struct Vec vec;
   struct IterVec it;
 
@@ -55,7 +55,7 @@ TEST(pct_encoded, digit) {
 }
 
 TEST(pct_encoded, hex_min) {
-  const char *actual = "%00-";
+  const char *actual = "%00|";
   struct Vec vec;
   struct IterVec it;
 
@@ -67,7 +67,7 @@ TEST(pct_encoded, hex_min) {
 }
 
 TEST(pct_encoded, hex_max) {
-  const char *actual = "%FF-";
+  const char *actual = "%FF|";
   struct Vec vec;
   struct IterVec it;
 
@@ -79,7 +79,7 @@ TEST(pct_encoded, hex_max) {
 }
 
 TEST(pct_encoded, not_hex) {
-  const char *actual = "%FG-";
+  const char *actual = "%FG|";
   struct Vec vec;
   struct IterVec it;
 
@@ -91,7 +91,7 @@ TEST(pct_encoded, not_hex) {
 }
 
 TEST(pct_encoded, unfinished_hex) {
-  const char *actual = "%F-";
+  const char *actual = "%F|";
   struct Vec vec;
   struct IterVec it;
 
@@ -103,7 +103,19 @@ TEST(pct_encoded, unfinished_hex) {
 }
 
 TEST(pct_encoded, no_percent) {
-  const char *actual = "AF-";
+  const char *actual = "AF|";
+  struct Vec vec;
+  struct IterVec it;
+
+  vec_init(&vec);
+  vec_push_str(&vec, actual, strlen(actual));
+  iterVec_init(&it, &vec);
+
+  ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
+}
+
+TEST(pct_encoded, invalid) {
+  const char *actual = "|||";
   struct Vec vec;
   struct IterVec it;
 

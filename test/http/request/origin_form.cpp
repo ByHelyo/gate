@@ -19,7 +19,7 @@ TEST(origin_form, empty) {
 }
 
 TEST(origin_form, space) {
-  const char *actual = " -";
+  const char *actual = " |";
   struct Vec vec;
   struct IterVec it;
 
@@ -42,6 +42,18 @@ TEST(origin_form, no_query) {
   ASSERT_EQ(origin_form_parse(&it), ParseOk);
 }
 
+TEST(origin_form, no_query_followed_with_characters) {
+  const char *actual = "/where|";
+  struct Vec vec;
+  struct IterVec it;
+
+  vec_init(&vec);
+  vec_push_str(&vec, actual, strlen(actual));
+  iterVec_init(&it, &vec);
+
+  ASSERT_EQ(origin_form_parse(&it), ParseOk);
+}
+
 TEST(origin_form, with_query) {
   const char *actual = "/where?q=now";
   struct Vec vec;
@@ -52,4 +64,16 @@ TEST(origin_form, with_query) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(origin_form_parse(&it), ParseOk);
+}
+
+TEST(origin_form, invalid) {
+  const char *actual = "|/where?q=now";
+  struct Vec vec;
+  struct IterVec it;
+
+  vec_init(&vec);
+  vec_push_str(&vec, actual, strlen(actual));
+  iterVec_init(&it, &vec);
+
+  ASSERT_EQ(origin_form_parse(&it), ParseErr);
 }

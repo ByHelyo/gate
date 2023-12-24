@@ -19,7 +19,7 @@ TEST(sub_delims, empty) {
 }
 
 TEST(sub_delims, space) {
-  const char *actual = " -";
+  const char *actual = " |";
   struct Vec vec;
   struct IterVec it;
 
@@ -31,7 +31,7 @@ TEST(sub_delims, space) {
 }
 
 TEST(sub_delims, exclamation) {
-  const char *actual = "!-";
+  const char *actual = "!|";
   struct Vec vec;
   struct IterVec it;
 
@@ -43,7 +43,7 @@ TEST(sub_delims, exclamation) {
 }
 
 TEST(sub_delims, dollar) {
-  const char *actual = "$-";
+  const char *actual = "$|";
   struct Vec vec;
   struct IterVec it;
 
@@ -55,7 +55,7 @@ TEST(sub_delims, dollar) {
 }
 
 TEST(sub_delims, ampersand) {
-  const char *actual = "&-";
+  const char *actual = "&|";
   struct Vec vec;
   struct IterVec it;
 
@@ -67,7 +67,7 @@ TEST(sub_delims, ampersand) {
 }
 
 TEST(sub_delims, single_quote) {
-  const char *actual = "'-";
+  const char *actual = "'|";
   struct Vec vec;
   struct IterVec it;
 
@@ -79,7 +79,7 @@ TEST(sub_delims, single_quote) {
 }
 
 TEST(sub_delims, round_open_bracket) {
-  const char *actual = "(-";
+  const char *actual = "(|";
   struct Vec vec;
   struct IterVec it;
 
@@ -91,7 +91,7 @@ TEST(sub_delims, round_open_bracket) {
 }
 
 TEST(sub_delims, round_close_bracket) {
-  const char *actual = ")-";
+  const char *actual = ")|";
   struct Vec vec;
   struct IterVec it;
 
@@ -103,7 +103,7 @@ TEST(sub_delims, round_close_bracket) {
 }
 
 TEST(sub_delims, star) {
-  const char *actual = "*-";
+  const char *actual = "*|";
   struct Vec vec;
   struct IterVec it;
 
@@ -115,7 +115,7 @@ TEST(sub_delims, star) {
 }
 
 TEST(sub_delims, plus) {
-  const char *actual = "+-";
+  const char *actual = "+|";
   struct Vec vec;
   struct IterVec it;
 
@@ -127,7 +127,7 @@ TEST(sub_delims, plus) {
 }
 
 TEST(sub_delims, comma) {
-  const char *actual = ",-";
+  const char *actual = ",|";
   struct Vec vec;
   struct IterVec it;
 
@@ -139,7 +139,7 @@ TEST(sub_delims, comma) {
 }
 
 TEST(sub_delims, semi_colon) {
-  const char *actual = ";-";
+  const char *actual = ";|";
   struct Vec vec;
   struct IterVec it;
 
@@ -151,7 +151,7 @@ TEST(sub_delims, semi_colon) {
 }
 
 TEST(sub_delims, equal) {
-  const char *actual = "=-";
+  const char *actual = "=|";
   struct Vec vec;
   struct IterVec it;
 
@@ -163,7 +163,7 @@ TEST(sub_delims, equal) {
 }
 
 TEST(sub_delims, digit) {
-  const char *actual = "3-";
+  const char *actual = "3|";
   struct Vec vec;
   struct IterVec it;
 
@@ -175,7 +175,7 @@ TEST(sub_delims, digit) {
 }
 
 TEST(sub_delims, alpha) {
-  const char *actual = "a-";
+  const char *actual = "a|";
   struct Vec vec;
   struct IterVec it;
 
@@ -187,7 +187,7 @@ TEST(sub_delims, alpha) {
 }
 
 TEST(sub_delims, square_open_bracket) {
-  const char *actual = "[-";
+  const char *actual = "[|";
   struct Vec vec;
   struct IterVec it;
 

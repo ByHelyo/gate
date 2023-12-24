@@ -19,7 +19,7 @@ TEST(absolute_path, empty) {
 }
 
 TEST(absolute_path, space) {
-  const char *actual = " -";
+  const char *actual = " |";
   struct Vec vec;
   struct IterVec it;
 
@@ -31,7 +31,7 @@ TEST(absolute_path, space) {
 }
 
 TEST(absolute_path, invalid) {
-  const char *actual = "-";
+  const char *actual = "|";
   struct Vec vec;
   struct IterVec it;
 
@@ -43,7 +43,7 @@ TEST(absolute_path, invalid) {
 }
 
 TEST(absolute_path, simple_valid) {
-  const char *actual = "/C -";
+  const char *actual = "/C |";
   struct Vec vec;
   struct IterVec it;
 
@@ -55,7 +55,7 @@ TEST(absolute_path, simple_valid) {
 }
 
 TEST(absolute_path, slash) {
-  const char *actual = "/ -";
+  const char *actual = "/ |";
   struct Vec vec;
   struct IterVec it;
 
@@ -67,7 +67,7 @@ TEST(absolute_path, slash) {
 }
 
 TEST(absolute_path, double_slash) {
-  const char *actual = "// -";
+  const char *actual = "// |";
   struct Vec vec;
   struct IterVec it;
 
@@ -79,7 +79,7 @@ TEST(absolute_path, double_slash) {
 }
 
 TEST(absolute_path, valid) {
-  const char *actual = "/('%1A'Helloworld!') -";
+  const char *actual = "/('%1A'Helloworld!') |";
   struct Vec vec;
   struct IterVec it;
 
@@ -91,7 +91,7 @@ TEST(absolute_path, valid) {
 }
 
 TEST(absolute_path, long_valid) {
-  const char *actual = "/('%1A'Helloworld!')/%AA/,,,%DA -";
+  const char *actual = "/('%1A'Helloworld!')/%AA/,,,%DA |";
   struct Vec vec;
   struct IterVec it;
 

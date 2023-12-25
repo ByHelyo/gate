@@ -9,6 +9,7 @@ add_executable(test_request
         query_parse.cpp
         scheme.cpp
         userinfo.cpp
+        h16.cpp
 )
 
 target_link_libraries(test_request PRIVATE

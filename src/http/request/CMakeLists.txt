@@ -16,6 +16,10 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/hier_part.h"
         "${gate_SOURCE_DIR}/include/http/request/authority.h"
         "${gate_SOURCE_DIR}/include/http/request/userinfo.h"
+        "${gate_SOURCE_DIR}/include/http/request/host.h"
+        "${gate_SOURCE_DIR}/include/http/request/ip_literal.h"
+        "${gate_SOURCE_DIR}/include/http/request/ipv6address.h"
+        "${gate_SOURCE_DIR}/include/http/request/h16.h"
 )
 
 add_library(request
@@ -37,6 +41,10 @@ add_library(request
         hier_part.c
         authority.c
         userinfo.c
+        host.c
+        ip_literal.c
+        ipv6address.c
+        h16.c
         ${HEADER_LIST})
 
 target_link_libraries(request PRIVATE

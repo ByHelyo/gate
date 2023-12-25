@@ -37,3 +37,14 @@ struct IterResult iterVec_next(struct IterVec *iterVec) {
 
   return ret;
 }
+
+struct IterResult iterVec_nth(struct IterVec *iterVec, size_t n) {
+  struct IterResult ret = iterResult_build();
+
+  if (iterVec->idx + n < iterVec->vec->size) {
+    ret.ch = vec_get(iterVec->vec, iterVec->idx);
+    ret.status = IterSome;
+  }
+
+  return ret;
+}

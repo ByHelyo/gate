@@ -3,8 +3,6 @@
 
 #include "http/request/request.h"
 
-struct IterVec;
-
 int is_sub_delims(char ch);
 
 enum ParseResult sub_delims_parse(struct IterVec *http);

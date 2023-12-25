@@ -79,4 +79,23 @@ struct IterResult iterVec_peek(struct IterVec *iterVec);
  */
 struct IterResult iterVec_next(struct IterVec *iterVec);
 
+/**
+ * \brief Get the nth element of the iterator.
+ *
+ * Returns the nth element of the iterator. The count starts from zero,
+ * so nth(0) returns the first value, nth(1) the second, and so on.
+ *
+ * \param iterVec Pointer to the IterVec structure.
+ * \param n The index of the element to retrieve.
+ * \return IterResult containing the nth element if available, otherwise an
+ * empty IterResult.
+ *
+ * Note that the iterator does not consume the element retrieved by nth().
+ * All preceding elements are unaffected.
+ *
+ * nth() will return an empty IterResult if n is greater than or equal to
+ * the length of the iterator.
+ */
+struct IterResult iterVec_nth(struct IterVec *iterVec, size_t n);
+
 #endif // GATE_ITER_H

@@ -3,8 +3,6 @@
 
 #include "http/request/request.h"
 
-struct IterVec;
-
 int is_pct_encoded(char ch);
 
 enum ParseResult pct_encoded_parse(struct IterVec *http);

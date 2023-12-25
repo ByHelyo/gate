@@ -3,8 +3,6 @@
 
 #include "http/request/request.h"
 
-struct IterVec;
-
 int is_unreserved(char ch);
 
 enum ParseResult unreserved_parse(struct IterVec *http);

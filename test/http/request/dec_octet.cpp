@@ -16,6 +16,7 @@ TEST(dec_octet, empty) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(dec_octet_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(dec_octet, space) {
@@ -28,6 +29,7 @@ TEST(dec_octet, space) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(dec_octet_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(dec_octet, all) {

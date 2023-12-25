@@ -16,6 +16,7 @@ TEST(userinfo, empty) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(userinfo_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(userinfo, space) {
@@ -28,6 +29,7 @@ TEST(userinfo, space) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(userinfo_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(userinfo, unreserved) {
@@ -40,6 +42,7 @@ TEST(userinfo, unreserved) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(userinfo_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(userinfo, pct_encoded) {
@@ -52,6 +55,7 @@ TEST(userinfo, pct_encoded) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(userinfo_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(userinfo, sub_delims) {
@@ -64,6 +68,7 @@ TEST(userinfo, sub_delims) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(userinfo_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(userinfo, unreserved_with_sub_delims) {
@@ -76,6 +81,7 @@ TEST(userinfo, unreserved_with_sub_delims) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(userinfo_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(userinfo, unreserved_with_pct_encoded) {
@@ -88,6 +94,7 @@ TEST(userinfo, unreserved_with_pct_encoded) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(userinfo_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(userinfo, semi_colon) {
@@ -100,4 +107,5 @@ TEST(userinfo, semi_colon) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(userinfo_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }

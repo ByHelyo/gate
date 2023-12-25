@@ -16,6 +16,7 @@ TEST(h16, empty) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(h16_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(h16, space) {
@@ -28,6 +29,7 @@ TEST(h16, space) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(h16_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(h16, one_hexdig) {
@@ -40,6 +42,7 @@ TEST(h16, one_hexdig) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(h16_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(h16, valid) {
@@ -52,6 +55,7 @@ TEST(h16, valid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(h16_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(h16, valid_full) {
@@ -64,6 +68,7 @@ TEST(h16, valid_full) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(h16_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(h16, long_hexdig) {
@@ -76,4 +81,5 @@ TEST(h16, long_hexdig) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(h16_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }

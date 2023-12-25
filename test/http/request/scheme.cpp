@@ -16,6 +16,7 @@ TEST(scheme, empty) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(scheme_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(scheme, space) {
@@ -28,6 +29,7 @@ TEST(scheme, space) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(scheme_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(scheme, valid) {
@@ -40,6 +42,7 @@ TEST(scheme, valid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(scheme_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(scheme, valid_followed_with_characters) {
@@ -52,6 +55,7 @@ TEST(scheme, valid_followed_with_characters) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(scheme_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(scheme, long_valid) {
@@ -64,6 +68,7 @@ TEST(scheme, long_valid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(scheme_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(scheme, invalid) {
@@ -76,6 +81,7 @@ TEST(scheme, invalid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(scheme_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, 'e');
 }
 
 TEST(scheme, short_valid) {
@@ -88,6 +94,7 @@ TEST(scheme, short_valid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(scheme_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(scheme, short_invalid) {
@@ -100,4 +107,5 @@ TEST(scheme, short_invalid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(scheme_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }

@@ -16,6 +16,7 @@ TEST(pchar, empty) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pchar_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(pchar, space) {
@@ -28,6 +29,7 @@ TEST(pchar, space) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pchar_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(pchar, unreserved) {
@@ -40,6 +42,7 @@ TEST(pchar, unreserved) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pchar_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(pchar, pct_encoded) {
@@ -52,6 +55,7 @@ TEST(pchar, pct_encoded) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pchar_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(pchar, sub_delims) {
@@ -64,6 +68,7 @@ TEST(pchar, sub_delims) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pchar_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(pchar, square_close_bracket) {
@@ -76,4 +81,5 @@ TEST(pchar, square_close_bracket) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pchar_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, ']');
 }

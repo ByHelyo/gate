@@ -16,6 +16,7 @@ TEST(pct_encoded, empty) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(pct_encoded, space) {
@@ -28,6 +29,7 @@ TEST(pct_encoded, space) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(pct_encoded, hex) {
@@ -40,6 +42,7 @@ TEST(pct_encoded, hex) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(pct_encoded, digit) {
@@ -52,6 +55,7 @@ TEST(pct_encoded, digit) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(pct_encoded, hex_min) {
@@ -64,6 +68,7 @@ TEST(pct_encoded, hex_min) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(pct_encoded, hex_max) {
@@ -76,6 +81,7 @@ TEST(pct_encoded, hex_max) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(pct_encoded, not_hex) {
@@ -88,6 +94,7 @@ TEST(pct_encoded, not_hex) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(pct_encoded, unfinished_hex) {
@@ -100,6 +107,7 @@ TEST(pct_encoded, unfinished_hex) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(pct_encoded, no_percent) {
@@ -112,6 +120,7 @@ TEST(pct_encoded, no_percent) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, 'F');
 }
 
 TEST(pct_encoded, invalid) {
@@ -124,4 +133,5 @@ TEST(pct_encoded, invalid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }

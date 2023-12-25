@@ -16,6 +16,7 @@ TEST(query, empty) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(query_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(query, space) {
@@ -28,6 +29,7 @@ TEST(query, space) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(query_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(query, invalid) {
@@ -40,6 +42,7 @@ TEST(query, invalid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(query_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ']');
 }
 
 TEST(query, just_slash) {
@@ -52,6 +55,7 @@ TEST(query, just_slash) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(query_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(query, just_question_mark) {
@@ -64,6 +68,7 @@ TEST(query, just_question_mark) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(query_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(query, long_valid) {
@@ -76,6 +81,7 @@ TEST(query, long_valid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(query_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(query, wrong_pct_encoded) {
@@ -88,4 +94,5 @@ TEST(query, wrong_pct_encoded) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(query_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, ',');
 }

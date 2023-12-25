@@ -16,6 +16,7 @@ TEST(absolute_path, empty) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(absolute_path_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(absolute_path, space) {
@@ -28,6 +29,7 @@ TEST(absolute_path, space) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(absolute_path_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(absolute_path, invalid) {
@@ -40,6 +42,7 @@ TEST(absolute_path, invalid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(absolute_path_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(absolute_path, simple_valid) {
@@ -52,6 +55,7 @@ TEST(absolute_path, simple_valid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(absolute_path_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(absolute_path, slash) {
@@ -64,6 +68,7 @@ TEST(absolute_path, slash) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(absolute_path_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(absolute_path, double_slash) {
@@ -76,6 +81,7 @@ TEST(absolute_path, double_slash) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(absolute_path_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(absolute_path, valid) {
@@ -88,6 +94,7 @@ TEST(absolute_path, valid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(absolute_path_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(absolute_path, long_valid) {
@@ -100,4 +107,5 @@ TEST(absolute_path, long_valid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(absolute_path_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }

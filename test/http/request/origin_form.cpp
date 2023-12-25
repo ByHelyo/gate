@@ -16,6 +16,7 @@ TEST(origin_form, empty) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(origin_form_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(origin_form, space) {
@@ -28,6 +29,7 @@ TEST(origin_form, space) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(origin_form_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(origin_form, no_query) {
@@ -40,6 +42,7 @@ TEST(origin_form, no_query) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(origin_form_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(origin_form, no_query_followed_with_characters) {
@@ -52,6 +55,7 @@ TEST(origin_form, no_query_followed_with_characters) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(origin_form_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(origin_form, with_query) {
@@ -64,6 +68,7 @@ TEST(origin_form, with_query) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(origin_form_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(origin_form, invalid) {
@@ -76,4 +81,5 @@ TEST(origin_form, invalid) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(origin_form_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }

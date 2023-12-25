@@ -16,6 +16,7 @@ TEST(unreserved, empty) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(unreserved, space) {
@@ -28,6 +29,7 @@ TEST(unreserved, space) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(unreserved, dash) {
@@ -40,6 +42,7 @@ TEST(unreserved, dash) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(unreserved, dot) {
@@ -52,6 +55,7 @@ TEST(unreserved, dot) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(unreserved, underscore) {
@@ -64,6 +68,7 @@ TEST(unreserved, underscore) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(unreserved, wave) {
@@ -76,6 +81,7 @@ TEST(unreserved, wave) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
 }
 
 TEST(unreserved, alpha_lower) {
@@ -88,6 +94,7 @@ TEST(unreserved, alpha_lower) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(unreserved, alpha_upper) {
@@ -100,6 +107,7 @@ TEST(unreserved, alpha_upper) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(unreserved, digit_min) {
@@ -112,6 +120,7 @@ TEST(unreserved, digit_min) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(unreserved, digit_max) {
@@ -124,6 +133,7 @@ TEST(unreserved, digit_max) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(unreserved, alpha_upper_min) {
@@ -136,6 +146,7 @@ TEST(unreserved, alpha_upper_min) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(unreserved, alpha_upper_max) {
@@ -148,6 +159,7 @@ TEST(unreserved, alpha_upper_max) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(unreserved, alpha_lower_min) {
@@ -160,6 +172,7 @@ TEST(unreserved, alpha_lower_min) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(unreserved, alpha_lower_max) {
@@ -172,4 +185,5 @@ TEST(unreserved, alpha_lower_max) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(unreserved_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }

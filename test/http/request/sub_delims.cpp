@@ -16,6 +16,7 @@ TEST(sub_delims, empty) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '\0');
 }
 
 TEST(sub_delims, space) {
@@ -28,6 +29,7 @@ TEST(sub_delims, space) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, exclamation) {
@@ -40,6 +42,7 @@ TEST(sub_delims, exclamation) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, dollar) {
@@ -52,6 +55,7 @@ TEST(sub_delims, dollar) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, ampersand) {
@@ -64,6 +68,7 @@ TEST(sub_delims, ampersand) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, single_quote) {
@@ -76,6 +81,7 @@ TEST(sub_delims, single_quote) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, round_open_bracket) {
@@ -88,6 +94,7 @@ TEST(sub_delims, round_open_bracket) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, round_close_bracket) {
@@ -100,6 +107,7 @@ TEST(sub_delims, round_close_bracket) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, star) {
@@ -112,6 +120,7 @@ TEST(sub_delims, star) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, plus) {
@@ -124,6 +133,7 @@ TEST(sub_delims, plus) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, comma) {
@@ -136,6 +146,7 @@ TEST(sub_delims, comma) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, semi_colon) {
@@ -148,6 +159,7 @@ TEST(sub_delims, semi_colon) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, equal) {
@@ -160,6 +172,7 @@ TEST(sub_delims, equal) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, digit) {
@@ -172,6 +185,7 @@ TEST(sub_delims, digit) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, alpha) {
@@ -184,6 +198,7 @@ TEST(sub_delims, alpha) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
 TEST(sub_delims, square_open_bracket) {
@@ -196,4 +211,5 @@ TEST(sub_delims, square_open_bracket) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(sub_delims_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }

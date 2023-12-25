@@ -8,7 +8,7 @@ enum ParseResult ipv4address_parse(struct IterVec *http) {
       return ParseErr;
     }
 
-    struct IterResult ret = iterVec_peek(http);
+    struct IterResult ret = iterVec_next(http);
 
     if (!ret.status || ret.ch != '.') {
       return ParseErr;

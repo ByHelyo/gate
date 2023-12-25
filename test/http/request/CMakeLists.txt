@@ -11,6 +11,7 @@ add_executable(test_request
         userinfo.cpp
         h16.cpp
         dec_octet.cpp
+        ipv4address.cpp
 )
 
 target_link_libraries(test_request PRIVATE

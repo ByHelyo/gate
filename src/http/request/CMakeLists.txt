@@ -20,6 +20,9 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/ip_literal.h"
         "${gate_SOURCE_DIR}/include/http/request/ipv6address.h"
         "${gate_SOURCE_DIR}/include/http/request/h16.h"
+        "${gate_SOURCE_DIR}/include/http/request/ls32.h"
+        "${gate_SOURCE_DIR}/include/http/request/ipv4address.h"
+        "${gate_SOURCE_DIR}/include/http/request/dec_octet.h"
 )
 
 add_library(request
@@ -45,6 +48,9 @@ add_library(request
         ip_literal.c
         ipv6address.c
         h16.c
+        ls32.c
+        ipv4address.c
+        dec_octet.c
         ${HEADER_LIST})
 
 target_link_libraries(request PRIVATE

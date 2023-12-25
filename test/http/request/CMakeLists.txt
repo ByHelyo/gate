@@ -10,6 +10,7 @@ add_executable(test_request
         scheme.cpp
         userinfo.cpp
         h16.cpp
+        dec_octet.cpp
 )
 
 target_link_libraries(test_request PRIVATE

@@ -81,5 +81,18 @@ TEST(h16, long_hexdig) {
   iterVec_init(&it, &vec);
 
   ASSERT_EQ(h16_parse(&it), ParseOk);
-  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+  ASSERT_EQ(iterVec_peek(&it).ch, 'D');
+}
+
+TEST(h16, lowercase) {
+  const char *actual = "abcef |";
+  struct Vec vec;
+  struct IterVec it;
+
+  vec_init(&vec);
+  vec_push_str(&vec, actual, strlen(actual));
+  iterVec_init(&it, &vec);
+
+  ASSERT_EQ(h16_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, 'f');
 }

@@ -45,6 +45,19 @@ TEST(pct_encoded, hex) {
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
 }
 
+TEST(pct_encoded, hex_lowercase) {
+  const char *actual = "%af|";
+  struct Vec vec;
+  struct IterVec it;
+
+  vec_init(&vec);
+  vec_push_str(&vec, actual, strlen(actual));
+  iterVec_init(&it, &vec);
+
+  ASSERT_EQ(pct_encoded_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
+}
+
 TEST(pct_encoded, digit) {
   const char *actual = "%33|";
   struct Vec vec;

@@ -4,7 +4,7 @@
 
 enum ParseResult h16_parse(struct IterVec *http) {
   int count = 0;
-  while (1) {
+  for (int i = 0; i < 4; ++i) {
     struct IterResult ret = iterVec_peek(http);
 
     if (!ret.status || !is_hexdig(ret.ch)) {

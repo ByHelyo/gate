@@ -109,3 +109,16 @@ TEST(ls32, mix_invalid) {
   ASSERT_EQ(ls32_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, 'G');
 }
+
+TEST(ls32, ipv6_with_semicolon) {
+  const char *actual = "1.1.1.1: |";
+  struct Vec vec;
+  struct IterVec it;
+
+  vec_init(&vec);
+  vec_push_str(&vec, actual, strlen(actual));
+  iterVec_init(&it, &vec);
+
+  ASSERT_EQ(ls32_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, ':');
+}

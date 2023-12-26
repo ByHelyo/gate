@@ -18,4 +18,6 @@ int is_alpha(char ch) {
 
 int is_digit(char ch) { return ch >= '0' && ch <= '9'; }
 
-int is_hexdig(char ch) { return is_digit(ch) || (ch >= 'A' && ch <= 'F'); }
+int is_hexdig(char ch) {
+  return is_digit(ch) || (ch >= 'A' && ch <= 'F') || (ch >= 'a' && ch <= 'f');
+}

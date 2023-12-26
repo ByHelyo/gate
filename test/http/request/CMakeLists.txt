@@ -13,6 +13,7 @@ add_executable(test_request
         dec_octet.cpp
         ipv4address.cpp
         ls32.cpp
+        ipv6address.cpp
 )
 
 target_link_libraries(test_request PRIVATE

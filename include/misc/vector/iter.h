@@ -50,6 +50,20 @@ struct IterVec {
 void iterVec_init(struct IterVec *iterVec, struct Vec *vec);
 
 /**
+ * \brief Copies the state of the source iterator to the destination iterator.
+ *
+ * Copies the state of the source iterator (`src`) to the destination iterator
+ * (`dst`). This includes copying the index and the vector reference from the
+ * source to the destination.
+ *
+ * \param src Pointer to the source IterVec structure.
+ * \param dst Pointer to the destination IterVec structure.
+ *
+ * This function copies the index
+ */
+void iterVec_copy(struct IterVec *src, struct IterVec *dst);
+
+/**
  * \brief Peeks at the next element in the Vec using the iterator.
  *
  * Retrieves the next element from the Vec being iterated by the provided

@@ -15,6 +15,11 @@ void iterVec_init(struct IterVec *iterVec, struct Vec *vec) {
   iterVec->idx = 0;
 }
 
+void iterVec_copy(struct IterVec *src, struct IterVec *dst) {
+  dst->idx = src->idx;
+  dst->vec = src->vec;
+}
+
 struct IterResult iterVec_peek(struct IterVec *iterVec) {
   struct IterResult ret = iterResult_build();
 

@@ -12,7 +12,7 @@ enum ParseResult fourth(struct IterVec *http);
 enum ParseResult fifth(struct IterVec *http);
 enum ParseResult sixth(struct IterVec *http);
 enum ParseResult seventh(struct IterVec *http);
-enum ParseResult eigth(struct IterVec *http);
+enum ParseResult eighth(struct IterVec *http);
 enum ParseResult ninth(struct IterVec *http);
 
 enum ParseResult ipv6address_parse(struct IterVec *http) {
@@ -61,7 +61,7 @@ enum ParseResult ipv6address_parse(struct IterVec *http) {
 
   iterVec_copy(&save, http);
 
-  if (eigth(http)) {
+  if (eighth(http)) {
     return ParseOk;
   }
 
@@ -380,7 +380,7 @@ enum ParseResult seventh(struct IterVec *http) {
   return ls32_parse(http);
 }
 
-enum ParseResult eigth(struct IterVec *http) {
+enum ParseResult eighth(struct IterVec *http) {
   struct IterResult first = iterVec_peek(http);
   struct IterResult second;
 

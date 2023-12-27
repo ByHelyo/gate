@@ -2,6 +2,7 @@
 
 #include "http/request/authority.h"
 #include "http/request/path_abempty.h"
+#include "http/request/path_absolute.h"
 #include "misc/vector/iter.h"
 
 enum ParseResult hier_part_parse(struct IterVec *http) {
@@ -25,11 +26,9 @@ enum ParseResult hier_part_parse(struct IterVec *http) {
         return ParseErr;
       }
 
-      if (!path_abempty_parse(http)) {
-        return ParseErr;
-      }
+      return path_abempty_parse(http);
     } else {
-      // TODO : path-absolute
+      return path_absolute_parse(http);
     }
   }
 

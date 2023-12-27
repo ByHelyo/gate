@@ -27,6 +27,7 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/reg_name.h"
         "${gate_SOURCE_DIR}/include/http/request/port.h"
         "${gate_SOURCE_DIR}/include/http/request/path_abempty.h"
+        "${gate_SOURCE_DIR}/include/http/request/path_absolute.h"
 )
 
 add_library(request
@@ -59,6 +60,9 @@ add_library(request
         reg_name.c
         port.c
         path_abempty.c
+        path_absolute.c
+        segment_nz.c
+        segment_nz.c
         ${HEADER_LIST})
 
 target_link_libraries(request PRIVATE

@@ -21,6 +21,8 @@ add_executable(test_request
         port.cpp
         authority.cpp
         path_abempty.cpp
+        segment_nz.cpp
+        path_absolute.cpp
 )
 
 target_link_libraries(test_request PRIVATE

@@ -3,8 +3,6 @@
 
 #include "http/request/request.h"
 
-struct IterVec;
-
 int is_pchar(char ch);
 
 enum ParseResult pchar_parse(struct IterVec *http);

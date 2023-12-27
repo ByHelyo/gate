@@ -26,6 +26,7 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/ipvfuture.h"
         "${gate_SOURCE_DIR}/include/http/request/reg_name.h"
         "${gate_SOURCE_DIR}/include/http/request/port.h"
+        "${gate_SOURCE_DIR}/include/http/request/path_abempty.h"
 )
 
 add_library(request
@@ -57,6 +58,7 @@ add_library(request
         ipvfuture.c
         reg_name.c
         port.c
+        path_abempty.c
         ${HEADER_LIST})
 
 target_link_libraries(request PRIVATE

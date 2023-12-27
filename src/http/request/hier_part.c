@@ -1,6 +1,7 @@
 #include "http/request/hier_part.h"
 
 #include "http/request/authority.h"
+#include "http/request/path_abempty.h"
 #include "misc/vector/iter.h"
 
 enum ParseResult hier_part_parse(struct IterVec *http) {
@@ -21,6 +22,10 @@ enum ParseResult hier_part_parse(struct IterVec *http) {
     if (ret.ch == '/') {
       iterVec_next(http);
       if (!authority_parse(http)) {
+        return ParseErr;
+      }
+
+      if (!path_abempty_parse(http)) {
         return ParseErr;
       }
     } else {

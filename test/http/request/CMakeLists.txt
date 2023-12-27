@@ -20,6 +20,7 @@ add_executable(test_request
         reg_name.cpp
         port.cpp
         authority.cpp
+        path_abempty.cpp
 )
 
 target_link_libraries(test_request PRIVATE

@@ -132,19 +132,46 @@ enum ParseResult third(struct IterVec *http) {
 }
 
 enum ParseResult fourth(struct IterVec *http) {
-  struct IterResult ret = iterVec_peek(http);
+  struct IterResult first = iterVec_peek(http);
+  struct IterResult second;
 
-  struct IterResult first = iterVec_next(http);
-  struct IterResult second = iterVec_next(http);
+  if (!first.status) {
+    return ParseErr;
+  }
+
+  if (is_hexdig(first.ch)) {
+    if (!h16_parse(http)) {
+      return ParseErr;
+    }
+
+    for (int i = 0; i < 1; ++i) {
+      first = iterVec_peek(http);
+      second = iterVec_nth(http, 1);
+
+      if (first.status && second.status && first.ch == ':' &&
+          second.ch == ':') {
+        break;
+      }
+
+      iterVec_next(http);
+
+      if (!h16_parse(http)) {
+        return ParseErr;
+      }
+    }
+  }
+
+  first = iterVec_next(http);
+  second = iterVec_next(http);
 
   if (!first.status || !second.status || first.ch != ':' || second.ch != ':') {
     return ParseErr;
   }
 
   for (int i = 0; i < 3; ++i) {
-    ret = iterVec_peek(http);
+    first = iterVec_peek(http);
 
-    if (!ret.status || !is_hexdig(ret.ch)) {
+    if (!first.status || !is_hexdig(first.ch)) {
       return ParseErr;
     }
 
@@ -152,9 +179,9 @@ enum ParseResult fourth(struct IterVec *http) {
       return ParseErr;
     }
 
-    ret = iterVec_next(http);
+    first = iterVec_next(http);
 
-    if (ret.status && ret.ch != ':') {
+    if (first.status && first.ch != ':') {
       return ParseErr;
     }
   }

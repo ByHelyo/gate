@@ -51,7 +51,7 @@ TEST(ipv6address, ipv6_first) {
   vec_free(&vec);
 }
 
-/*TEST(ipv6address, ipv6_first_wrong) {
+TEST(ipv6address, ipv6_wrong_hexdig) {
   const char *actual = "2001:0db8:85ba3:0000:0000:8a2e:0370:7334|";
   struct Vec vec;
   struct IterVec it;
@@ -62,7 +62,7 @@ TEST(ipv6address, ipv6_first) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
-}*/
+}
 
 TEST(ipv6address, ipv6_second) {
   const char *actual = "::CA2F:B923:0419:9E3C:47B4:9D8F:E7E2|";

@@ -3,6 +3,8 @@
 #include "http/request/authority.h"
 #include "http/request/path_abempty.h"
 #include "http/request/path_absolute.h"
+#include "http/request/path_rootless.h"
+#include "http/request/pchar.h"
 #include "misc/vector/iter.h"
 
 enum ParseResult hier_part_parse(struct IterVec *http) {
@@ -32,5 +34,9 @@ enum ParseResult hier_part_parse(struct IterVec *http) {
     }
   }
 
-  return ParseErr;
+  if (is_pchar(ret.ch)) {
+    return path_rootless_parse(http);
+  }
+
+  return ParseOk;
 }

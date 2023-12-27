@@ -1,6 +1,7 @@
 #include "http/request/ip_literal.h"
 
 #include "http/request/ipv6address.h"
+#include "http/request/ipvfuture.h"
 #include "misc/vector/iter.h"
 
 enum ParseResult ip_literal_parse(struct IterVec *http) {
@@ -16,5 +17,13 @@ enum ParseResult ip_literal_parse(struct IterVec *http) {
     return ParseErr;
   }
 
-  return ret.ch == 'v' ? ipv6address_parse(http) : ipv6address_parse(http);
+  if (ret.ch != 'v') {
+    ipv6address_parse(http);
+  } else {
+    ipvfuture_parse(http);
+  }
+
+  ret = iterVec_next(http);
+
+  return ret.status && ret.ch == ']';
 }

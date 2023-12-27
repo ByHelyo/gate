@@ -17,6 +17,8 @@ TEST(ipv6address, empty) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '\0');
+
+  vec_free(&vec);
 }
 
 TEST(ipv6address, space) {
@@ -30,6 +32,8 @@ TEST(ipv6address, space) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '\0');
+
+  vec_free(&vec);
 }
 
 TEST(ipv6address, ipv6_first) {
@@ -43,6 +47,8 @@ TEST(ipv6address, ipv6_first) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 /*TEST(ipv6address, ipv6_first_wrong) {
@@ -69,6 +75,8 @@ TEST(ipv6address, ipv6_second) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(ipv6address, ipv6_third_v1) {
@@ -82,6 +90,8 @@ TEST(ipv6address, ipv6_third_v1) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(ipv6address, ipv6_third_v2) {
@@ -95,6 +105,8 @@ TEST(ipv6address, ipv6_third_v2) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(ipv6address, ipv6_fourth_v1) {
@@ -108,6 +120,8 @@ TEST(ipv6address, ipv6_fourth_v1) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(ipv6address, ipv6_fourth_v2) {
@@ -121,6 +135,8 @@ TEST(ipv6address, ipv6_fourth_v2) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(ipv6address, ipv6_fourth_v3) {
@@ -134,6 +150,8 @@ TEST(ipv6address, ipv6_fourth_v3) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(ipv6address, ipv6_short_semi_colon) {
@@ -147,6 +165,8 @@ TEST(ipv6address, ipv6_short_semi_colon) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(ipv6address, ipv6_short_semi_colon_2) {
@@ -160,4 +180,6 @@ TEST(ipv6address, ipv6_short_semi_colon_2) {
 
   ASSERT_EQ(ipv6address_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }

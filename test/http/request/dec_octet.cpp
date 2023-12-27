@@ -17,6 +17,8 @@ TEST(dec_octet, empty) {
 
   ASSERT_EQ(dec_octet_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '\0');
+
+  vec_free(&vec);
 }
 
 TEST(dec_octet, space) {
@@ -30,6 +32,8 @@ TEST(dec_octet, space) {
 
   ASSERT_EQ(dec_octet_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+
+  vec_free(&vec);
 }
 
 TEST(dec_octet, all) {
@@ -46,6 +50,8 @@ TEST(dec_octet, all) {
 
     ASSERT_EQ(dec_octet_parse(&it), ParseOk);
     ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+    vec_free(&vec);
   }
 }
 
@@ -60,6 +66,8 @@ TEST(dec_octet, take_highest_number) {
 
   ASSERT_EQ(dec_octet_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '1');
+
+  vec_free(&vec);
 }
 
 TEST(dec_octet, not_a_number) {
@@ -73,4 +81,6 @@ TEST(dec_octet, not_a_number) {
 
   ASSERT_EQ(dec_octet_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }

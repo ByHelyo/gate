@@ -17,6 +17,8 @@ TEST(segment, empty) {
 
   ASSERT_EQ(segment_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '\0');
+
+  vec_free(&vec);
 }
 
 TEST(segment, space) {
@@ -30,6 +32,8 @@ TEST(segment, space) {
 
   ASSERT_EQ(segment_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+
+  vec_free(&vec);
 }
 
 TEST(segment, valid) {
@@ -43,6 +47,8 @@ TEST(segment, valid) {
 
   ASSERT_EQ(segment_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+
+  vec_free(&vec);
 }
 
 TEST(segment, nothing) {
@@ -56,6 +62,8 @@ TEST(segment, nothing) {
 
   ASSERT_EQ(segment_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, ']');
+
+  vec_free(&vec);
 }
 
 TEST(segment, long_segment) {
@@ -69,6 +77,8 @@ TEST(segment, long_segment) {
 
   ASSERT_EQ(segment_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+
+  vec_free(&vec);
 }
 
 TEST(segment, pct_encoded_unfinished) {
@@ -82,6 +92,8 @@ TEST(segment, pct_encoded_unfinished) {
 
   ASSERT_EQ(segment_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(segment, long_segment_pct_unfinished) {
@@ -95,4 +107,6 @@ TEST(segment, long_segment_pct_unfinished) {
 
   ASSERT_EQ(segment_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, ')');
+
+  vec_free(&vec);
 }

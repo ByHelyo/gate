@@ -17,6 +17,8 @@ TEST(pct_encoded, empty) {
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '\0');
+
+  vec_free(&vec);
 }
 
 TEST(pct_encoded, space) {
@@ -30,6 +32,8 @@ TEST(pct_encoded, space) {
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(pct_encoded, hex) {
@@ -43,6 +47,8 @@ TEST(pct_encoded, hex) {
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(pct_encoded, hex_lowercase) {
@@ -56,6 +62,8 @@ TEST(pct_encoded, hex_lowercase) {
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(pct_encoded, digit) {
@@ -69,6 +77,8 @@ TEST(pct_encoded, digit) {
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(pct_encoded, hex_min) {
@@ -82,6 +92,8 @@ TEST(pct_encoded, hex_min) {
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(pct_encoded, hex_max) {
@@ -95,6 +107,8 @@ TEST(pct_encoded, hex_max) {
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(pct_encoded, not_hex) {
@@ -108,6 +122,8 @@ TEST(pct_encoded, not_hex) {
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(pct_encoded, unfinished_hex) {
@@ -121,6 +137,8 @@ TEST(pct_encoded, unfinished_hex) {
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '\0');
+
+  vec_free(&vec);
 }
 
 TEST(pct_encoded, no_percent) {
@@ -134,6 +152,8 @@ TEST(pct_encoded, no_percent) {
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, 'F');
+
+  vec_free(&vec);
 }
 
 TEST(pct_encoded, invalid) {
@@ -147,4 +167,6 @@ TEST(pct_encoded, invalid) {
 
   ASSERT_EQ(pct_encoded_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }

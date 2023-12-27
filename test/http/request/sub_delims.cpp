@@ -17,6 +17,8 @@ TEST(sub_delims, empty) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '\0');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, space) {
@@ -30,6 +32,8 @@ TEST(sub_delims, space) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, exclamation) {
@@ -43,6 +47,8 @@ TEST(sub_delims, exclamation) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, dollar) {
@@ -56,6 +62,8 @@ TEST(sub_delims, dollar) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, ampersand) {
@@ -69,6 +77,8 @@ TEST(sub_delims, ampersand) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, single_quote) {
@@ -82,6 +92,8 @@ TEST(sub_delims, single_quote) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, round_open_bracket) {
@@ -95,6 +107,8 @@ TEST(sub_delims, round_open_bracket) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, round_close_bracket) {
@@ -108,6 +122,8 @@ TEST(sub_delims, round_close_bracket) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, star) {
@@ -121,6 +137,8 @@ TEST(sub_delims, star) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, plus) {
@@ -134,6 +152,8 @@ TEST(sub_delims, plus) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, comma) {
@@ -147,6 +167,8 @@ TEST(sub_delims, comma) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, semi_colon) {
@@ -160,6 +182,8 @@ TEST(sub_delims, semi_colon) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, equal) {
@@ -173,6 +197,8 @@ TEST(sub_delims, equal) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, digit) {
@@ -186,6 +212,8 @@ TEST(sub_delims, digit) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, alpha) {
@@ -199,6 +227,8 @@ TEST(sub_delims, alpha) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(sub_delims, square_open_bracket) {
@@ -212,4 +242,6 @@ TEST(sub_delims, square_open_bracket) {
 
   ASSERT_EQ(sub_delims_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }

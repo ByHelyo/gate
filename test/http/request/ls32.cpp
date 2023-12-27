@@ -17,6 +17,8 @@ TEST(ls32, empty) {
 
   ASSERT_EQ(ls32_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '\0');
+
+  vec_free(&vec);
 }
 
 TEST(ls32, space) {
@@ -30,6 +32,8 @@ TEST(ls32, space) {
 
   ASSERT_EQ(ls32_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+
+  vec_free(&vec);
 }
 
 TEST(ls32, valid_not_ipv4) {
@@ -43,6 +47,8 @@ TEST(ls32, valid_not_ipv4) {
 
   ASSERT_EQ(ls32_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+
+  vec_free(&vec);
 }
 
 TEST(ls32, valid_short_not_ipv4) {
@@ -56,6 +62,8 @@ TEST(ls32, valid_short_not_ipv4) {
 
   ASSERT_EQ(ls32_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+
+  vec_free(&vec);
 }
 
 TEST(ls32, valid_long_not_ipv4) {
@@ -69,6 +77,8 @@ TEST(ls32, valid_long_not_ipv4) {
 
   ASSERT_EQ(ls32_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+
+  vec_free(&vec);
 }
 
 TEST(ls32, valid_ipv4) {
@@ -82,6 +92,8 @@ TEST(ls32, valid_ipv4) {
 
   ASSERT_EQ(ls32_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+
+  vec_free(&vec);
 }
 
 TEST(ls32, mix) {
@@ -95,6 +107,8 @@ TEST(ls32, mix) {
 
   ASSERT_EQ(ls32_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '.');
+
+  vec_free(&vec);
 }
 
 TEST(ls32, mix_invalid) {
@@ -108,6 +122,8 @@ TEST(ls32, mix_invalid) {
 
   ASSERT_EQ(ls32_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, 'G');
+
+  vec_free(&vec);
 }
 
 TEST(ls32, ipv6_with_semicolon) {
@@ -121,4 +137,6 @@ TEST(ls32, ipv6_with_semicolon) {
 
   ASSERT_EQ(ls32_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, ':');
+
+  vec_free(&vec);
 }

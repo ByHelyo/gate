@@ -17,6 +17,8 @@ TEST(ipv4address, empty) {
 
   ASSERT_EQ(ipv4address_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '\0');
+
+  vec_free(&vec);
 }
 
 TEST(ipv4address, space) {
@@ -30,6 +32,8 @@ TEST(ipv4address, space) {
 
   ASSERT_EQ(ipv4address_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+
+  vec_free(&vec);
 }
 
 TEST(ipv4address, valid) {
@@ -43,6 +47,8 @@ TEST(ipv4address, valid) {
 
   ASSERT_EQ(ipv4address_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(ipv4address, localhost) {
@@ -56,6 +62,8 @@ TEST(ipv4address, localhost) {
 
   ASSERT_EQ(ipv4address_parse(&it), ParseOk);
   ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
 }
 
 TEST(ipv4address, not_dec_octet) {
@@ -70,6 +78,8 @@ TEST(ipv4address, not_dec_octet) {
   ASSERT_EQ(ipv4address_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '.');
   ASSERT_EQ(iterVec_nth(&it, 3).ch, '0');
+
+  vec_free(&vec);
 }
 
 TEST(ipv4address, invalid) {
@@ -83,6 +93,8 @@ TEST(ipv4address, invalid) {
 
   ASSERT_EQ(ipv4address_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, ',');
+
+  vec_free(&vec);
 }
 
 TEST(ipv4address, comma) {
@@ -96,6 +108,8 @@ TEST(ipv4address, comma) {
 
   ASSERT_EQ(ipv4address_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, '0');
+
+  vec_free(&vec);
 }
 
 TEST(ipv4address, hex) {
@@ -109,4 +123,6 @@ TEST(ipv4address, hex) {
 
   ASSERT_EQ(ipv4address_parse(&it), ParseErr);
   ASSERT_EQ(iterVec_peek(&it).ch, 'A');
+
+  vec_free(&vec);
 }

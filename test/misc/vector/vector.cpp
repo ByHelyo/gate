@@ -165,3 +165,17 @@ TEST(vector, vector_push_long_str) {
 
   vec_free(&vec);
 }
+
+TEST(vector, use_pointer) {
+  struct Vec vec;
+  const char *expected = "hello world!";
+
+  vec_init(&vec);
+  ASSERT_EQ(vec_push_str(&vec, expected, strlen(expected)), 0);
+
+  ASSERT_EQ(vec.size, strlen(expected));
+  ASSERT_EQ(vec.capacity, 16);
+  ASSERT_EQ(strncmp(expected, vec.data, strlen(expected)), 0);
+
+  vec_free(&vec);
+}

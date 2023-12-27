@@ -15,14 +15,14 @@ enum ParseResult hier_part_parse(struct IterVec *http) {
   }
 
   if (ret.ch == '/') {
-    iterVec_next(http);
-    ret = iterVec_next(http);
+    ret = iterVec_nth(http, 1);
 
     if (!ret.status) {
       return ParseErr;
     }
 
     if (ret.ch == '/') {
+      iterVec_next(http);
       iterVec_next(http);
       if (!authority_parse(http)) {
         return ParseErr;

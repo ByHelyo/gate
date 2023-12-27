@@ -24,6 +24,7 @@ add_executable(test_request
         segment_nz.cpp
         path_absolute.cpp
         path_rootless.cpp
+        hier_part.cpp
 )
 
 target_link_libraries(test_request PRIVATE

@@ -18,6 +18,8 @@ add_executable(test_request
         ip_literal.cpp
         host.cpp
         reg_name.cpp
+        port.cpp
+        authority.cpp
 )
 
 target_link_libraries(test_request PRIVATE

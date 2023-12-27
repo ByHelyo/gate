@@ -1,14 +1,17 @@
 #include "http/request/authority.h"
 
 #include "http/request/host.h"
+#include "http/request/port.h"
 #include "http/request/userinfo.h"
 #include "misc/vector/iter.h"
 
 enum ParseResult authority_parse(struct IterVec *http) {
+  struct IterVec save;
+  iterVec_copy(http, &save);
   struct IterResult ret = iterVec_peek(http);
 
   if (ret.status == IterNone) {
-    // TODO !
+    return ParseOk;
   }
 
   if (is_userinfo(ret.ch)) {
@@ -20,6 +23,8 @@ enum ParseResult authority_parse(struct IterVec *http) {
 
     if (ret.status && ret.ch == '@') {
       iterVec_next(http);
+    } else {
+      iterVec_copy(&save, http);
     }
   }
 
@@ -27,5 +32,13 @@ enum ParseResult authority_parse(struct IterVec *http) {
     return ParseErr;
   }
 
-  return ParseErr;
+  ret = iterVec_peek(http);
+
+  if (!ret.status || ret.ch != ':') {
+    return ParseOk;
+  }
+
+  iterVec_next(http);
+
+  return port_parse(http);
 }

@@ -15,6 +15,7 @@ add_executable(test_request
         ls32.cpp
         ipv6address.cpp
         ipvfuture.cpp
+        ip_literal.cpp
 )
 
 target_link_libraries(test_request PRIVATE

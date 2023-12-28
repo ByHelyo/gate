@@ -25,6 +25,9 @@ add_executable(test_request
         path_absolute.cpp
         path_rootless.cpp
         hier_part.cpp
+        fragment.cpp
+        absolute_uri.cpp
+        request_target.cpp
 )
 
 target_link_libraries(test_request PRIVATE

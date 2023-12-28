@@ -29,6 +29,9 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/path_abempty.h"
         "${gate_SOURCE_DIR}/include/http/request/path_absolute.h"
         "${gate_SOURCE_DIR}/include/http/request/path_rootless.h"
+        "${gate_SOURCE_DIR}/include/http/request/fragment.h"
+        "${gate_SOURCE_DIR}/include/http/request/asterik_form.h"
+        "${gate_SOURCE_DIR}/include/http/request/authority_form.h"
 )
 
 add_library(request
@@ -65,6 +68,9 @@ add_library(request
         segment_nz.c
         segment_nz.c
         path_rootless.c
+        fragment.c
+        authority_form.c
+        asterik_form.c
         ${HEADER_LIST})
 
 target_link_libraries(request PRIVATE

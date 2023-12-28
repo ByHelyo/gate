@@ -8,7 +8,5 @@ enum ParseResult asterik_form_parse(struct IterVec *http) {
     return ParseErr;
   }
 
-  iterVec_next(http);
-
   return ParseOk;
 }

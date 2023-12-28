@@ -65,3 +65,33 @@ TEST(absolute_uri, query) {
 
   vec_free(&vec);
 }
+
+TEST(absolute_uri, authority_form) {
+  const char *actual = "www.example.com:80|";
+  struct Vec vec;
+  struct IterVec it;
+
+  vec_init(&vec);
+  vec_push_str(&vec, actual, strlen(actual));
+  iterVec_init(&it, &vec);
+
+  ASSERT_EQ(absolute_uri_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
+}
+
+TEST(absolute_uri, absolute_uri_2) {
+  const char *actual = "http:123123|";
+  struct Vec vec;
+  struct IterVec it;
+
+  vec_init(&vec);
+  vec_push_str(&vec, actual, strlen(actual));
+  iterVec_init(&it, &vec);
+
+  ASSERT_EQ(absolute_uri_parse(&it), ParseOk);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
+
+  vec_free(&vec);
+}

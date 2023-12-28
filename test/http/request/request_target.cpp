@@ -30,8 +30,8 @@ TEST(request_target, space) {
   vec_push_str(&vec, actual, strlen(actual));
   iterVec_init(&it, &vec);
 
-  ASSERT_EQ(request_target_parse(&it), ParseOk);
-  ASSERT_EQ(iterVec_peek(&it).ch, ' ');
+  ASSERT_EQ(request_target_parse(&it), ParseErr);
+  ASSERT_EQ(iterVec_peek(&it).ch, '|');
 
   vec_free(&vec);
 }

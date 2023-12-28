@@ -28,6 +28,7 @@ add_executable(test_request
         fragment.cpp
         absolute_uri.cpp
         request_target.cpp
+        authority_form.cpp
 )
 
 target_link_libraries(test_request PRIVATE

@@ -44,7 +44,10 @@ int eventdata_destroy(struct EventData *event_data) {
 
 int eventdata_parse(struct EventData *event_data, struct TrieNode *methods) {
   struct IterVec iter_vec;
+  struct Request req;
   iterVec_init(&iter_vec, &event_data->data);
 
-  return request_parse(&iter_vec, methods) == ParseOk ? 1 : 0;
+  int ret = request_parse(&iter_vec, &req, methods) == ParseOk ? 1 : 0;
+
+  return ret;
 }

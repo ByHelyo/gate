@@ -1,7 +1,9 @@
 #ifndef GATE_UNRESERVED_H
 #define GATE_UNRESERVED_H
 
-#include "http/request/request.h"
+#include "http/request/parse_result.h"
+
+struct IterVec;
 
 int is_unreserved(char ch);
 

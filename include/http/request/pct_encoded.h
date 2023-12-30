@@ -1,7 +1,9 @@
 #ifndef GATE_PCT_ENCODED_H
 #define GATE_PCT_ENCODED_H
 
-#include "http/request/request.h"
+#include "http/request/parse_result.h"
+
+struct IterVec;
 
 int is_pct_encoded(char ch);
 

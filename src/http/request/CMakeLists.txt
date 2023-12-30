@@ -32,6 +32,7 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/fragment.h"
         "${gate_SOURCE_DIR}/include/http/request/asterik_form.h"
         "${gate_SOURCE_DIR}/include/http/request/authority_form.h"
+        "${gate_SOURCE_DIR}/include/http/request/parse_result.h"
 )
 
 add_library(request

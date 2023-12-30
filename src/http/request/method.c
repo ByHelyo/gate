@@ -1,5 +1,6 @@
 #include "http/request/method.h"
 
+#include "http/request/request.h"
 #include "misc/trie/trie.h"
 #include "misc/vector/iter.h"
 
@@ -17,12 +18,14 @@ void methods_trieInit(struct TrieNode *trieNode) { // TODO : error insert trie
   trieNode_insert(trieNode, "PATCH", PATCH);
 }
 
-enum ParseResult method_parse(struct IterVec *http, struct TrieNode *methods) {
+enum ParseResult method_parse(struct IterVec *http, struct Request *request,
+                              struct TrieNode *methods) {
   struct TrieResult trieResult = trieNode_searchIter(methods, http);
 
   if (!trieResult.trieStatus) {
     return ParseErr;
   }
 
+  request->method = (enum Method)trieResult.value;
   return ParseOk;
 }

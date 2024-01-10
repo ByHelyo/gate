@@ -12,6 +12,16 @@ enum ParseResult sp_parse(struct IterVec *http) {
   return ret.ch == ' ' ? ParseOk : ParseErr;
 }
 
+enum ParseResult char_parse(struct IterVec *http, char ch) {
+  struct IterResult ret = iterVec_next(http);
+
+  if (!ret.status) {
+    return ParseErr;
+  }
+
+  return ret.ch == ch ? ParseOk : ParseErr;
+}
+
 int is_alpha(char ch) {
   return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 }

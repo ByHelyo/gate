@@ -7,6 +7,8 @@ struct IterVec;
 
 enum ParseResult sp_parse(struct IterVec *http);
 
+enum ParseResult char_parse(struct IterVec *http, char ch);
+
 int is_alpha(char ch);
 
 int is_digit(char ch);

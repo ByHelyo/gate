@@ -33,6 +33,8 @@ set(HEADER_LIST
         "${gate_SOURCE_DIR}/include/http/request/asterik_form.h"
         "${gate_SOURCE_DIR}/include/http/request/authority_form.h"
         "${gate_SOURCE_DIR}/include/http/request/parse_result.h"
+        "${gate_SOURCE_DIR}/include/http/request/http_version.h"
+        "${gate_SOURCE_DIR}/include/http/request/http_name.h"
 )
 
 add_library(request
@@ -72,6 +74,8 @@ add_library(request
         fragment.c
         authority_form.c
         asterik_form.c
+        http_version.c
+        http_name.c
         ${HEADER_LIST})
 
 target_link_libraries(request PRIVATE
